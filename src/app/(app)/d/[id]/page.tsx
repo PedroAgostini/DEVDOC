@@ -109,16 +109,18 @@ export default async function DocumentPage({ params }: { params: Promise<{ id: s
         <h1 className="display" style={{ fontSize: "clamp(32px, 4vw, 48px)" }}>{doc.title}</h1>
         {doc.summary && <p className="lede" style={{ marginTop: 12, fontSize: 18 }}>{doc.summary}</p>}
 
-        <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", margin: "24px 0 8px" }}>
-          <span className="avatar" style={{ "--c": op?.color ?? "var(--action)" } as React.CSSProperties} aria-hidden="true">
-            {doc.author?.avatar_url ? <img src={doc.author.avatar_url} alt="" /> : initials(doc.author?.full_name ?? "")}
-          </span>
-          <span style={{ lineHeight: 1.35, flex: 1, minWidth: 200 }}>
-            <span style={{ display: "block", fontWeight: 600 }}>{doc.author?.full_name}</span>
-            <span className="muted small">
-              Publicado em {longDate(doc.published_at)} · versão {doc.version}
+        <div className="doc-strip">
+          <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
+            <span className="avatar" style={{ "--c": op?.color ?? "var(--action)" } as React.CSSProperties} aria-hidden="true">
+              {doc.author?.avatar_url ? <img src={doc.author.avatar_url} alt="" /> : initials(doc.author?.full_name ?? "")}
             </span>
-          </span>
+            <span style={{ lineHeight: 1.35, minWidth: 0 }}>
+              <span style={{ display: "block", fontWeight: 600 }}>{doc.author?.full_name}</span>
+              <span className="muted small" title={`Publicado em ${longDate(doc.published_at)}`} style={{ whiteSpace: "nowrap" }}>
+                {fullDay(doc.published_at)} · versão {doc.version}
+              </span>
+            </span>
+          </div>
           <DocActions
             id={doc.id}
             favorite={favorite}
@@ -134,7 +136,7 @@ export default async function DocumentPage({ params }: { params: Promise<{ id: s
         )}
 
         {canEdit && doc.draft_updated_at && (
-          <p className="notice no-print" style={{ margin: "16px 0 0" }}>
+          <p className="notice no-print" style={{ margin: "0 0 24px" }}>
             <Eye size={18} aria-hidden="true" style={{ flex: "none", marginTop: 2 }} />
             <span>
               Há alterações salvas que ainda não foram publicadas.{" "}
@@ -149,7 +151,6 @@ export default async function DocumentPage({ params }: { params: Promise<{ id: s
           </div>
         )}
 
-        <hr style={{ border: 0, height: 1, background: "var(--line)", margin: "28px 0 32px" }} />
         {doc.content_md.trim() ? (
           <Markdown source={doc.content_md} />
         ) : (

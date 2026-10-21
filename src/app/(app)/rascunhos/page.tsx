@@ -1,4 +1,5 @@
 import { DocList, DocRow } from "@/components/DocRow";
+import { DraftActions } from "@/components/DraftActions";
 import { getReference, myDrafts, requireMe } from "@/lib/data";
 
 export const metadata = { title: "Rascunhos" };
@@ -17,16 +18,29 @@ export default async function DraftsPage() {
       <section className="glass panel-flush">
         {docs.length ? (
           <DocList>
-            {docs.map((d) => (
-              <DocRow
+            {docs.map((d, i) => (
+              <div
                 key={d.id}
-                doc={d}
-                categories={ref.categories}
-                operations={ref.operations}
-                href={`/d/${d.id}/editar`}
-                note="editado"
-                date={d.draft_updated_at ?? d.updated_at}
-              />
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 4,
+                  paddingRight: 10,
+                  boxShadow: i ? "0 -1px 0 var(--line)" : undefined,
+                }}
+              >
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <DocRow
+                    doc={d}
+                    categories={ref.categories}
+                    operations={ref.operations}
+                    href={`/d/${d.id}/editar`}
+                    note="editado"
+                    date={d.draft_updated_at ?? d.updated_at}
+                  />
+                </div>
+                <DraftActions id={d.id} published={d.status === "published"} />
+              </div>
             ))}
           </DocList>
         ) : (

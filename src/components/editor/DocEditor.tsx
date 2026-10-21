@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { EditorContent, useEditor } from "@tiptap/react";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
-import { ArrowLeft, Check, CircleAlert, CircleDot, Eye, FileCode2, Loader2, Send, Type, Undo } from "lucide-react";
-import { discardDraft, publishDocument, saveDraft, updateMeta } from "@/app/actions/documents";
+import { ArrowLeft, Check, CircleAlert, CircleDot, Eye, FileCode2, Loader2, Send, Type } from "lucide-react";
+import { publishDocument, saveDraft, updateMeta } from "@/app/actions/documents";
+import { DraftActions } from "@/components/DraftActions";
 import { SetLight } from "@/components/SetLight";
 import { relative } from "@/lib/format";
 import type { Member, Reference } from "@/lib/types";
@@ -210,12 +211,6 @@ export function DocEditor(props: Props) {
     });
   }
 
-  async function discard() {
-    const r = await discardDraft(id);
-    if (!r.ok) return notify(r.error, true);
-    router.push(`/d/${id}`);
-    router.refresh();
-  }
 
   const op = reference.operations.find((o) => o.id === meta.operation_id);
   const statusLabel = {
@@ -261,10 +256,10 @@ export function DocEditor(props: Props) {
             <FileCode2 size={15} style={{ display: "inline", verticalAlign: -2, marginRight: 6 }} />Markdown
           </button>
         </div>
-        {status === "published" && unpublished && (
-          <button type="button" className="btn btn-quiet btn-sm" onClick={discard} title="Volta ao conteúdo publicado">
-            <Undo size={16} /> Descartar alterações
-          </button>
+        {status === "published" ? (
+          unpublished && <DraftActions id={id} published variant="button" afterDone="document" />
+        ) : (
+          <DraftActions id={id} published={false} variant="button" afterDone="drafts" />
         )}
         <a href={`/imprimir/${id}`} target="_blank" rel="noopener" className="btn btn-quiet btn-sm" title="Ver como vai ficar">
           <Eye size={16} /> <span className="hide-mobile">Prévia</span>

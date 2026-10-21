@@ -117,6 +117,23 @@ export async function publishDocument(id: string): Promise<ActionResult<{ versio
   return { ok: true, data: { version: Number(data) } };
 }
 
+/** Deletes a never-published draft for good, images included. */
+export async function deleteDraft(id: string): Promise<ActionResult> {
+  const { me, supabase } = await session();
+  const { data: doc } = await supabase
+    .from("documents")
+    .select("id,status,author_id")
+    .eq("id", id)
+    .maybeSingle();
+  if (!doc || doc.author_id !== me.id || doc.status !== "draft") {
+    return { ok: false, error: "Só rascunhos seus que nunca foram publicados podem ser excluídos aqui." };
+  }
+  // The delete policy only accepts documents already in the trash.
+  const moved = await supabase.from("documents").update({ deleted_at: new Date().toISOString() }).eq("id", id);
+  if (moved.error) return fail(moved.error.message);
+  return deleteForever(id);
+}
+
 export async function markReviewed(id: string): Promise<ActionResult<{ at: string }>> {
   const { supabase } = await session();
   const { data, error } = await supabase.rpc("mark_reviewed", { doc_id: id });

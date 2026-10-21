@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FilePlus2, Upload } from "lucide-react";
+import { FilePlus2, Star, Upload } from "lucide-react";
 import { Bars } from "@/components/Bars";
 import { DocList, DocRow } from "@/components/DocRow";
 import { createDocument } from "@/app/actions/documents";
@@ -132,6 +132,36 @@ export default async function Dashboard() {
           </div>
 
           <aside className="stack">
+            <section className="glass panel" aria-labelledby="fav-title">
+              <div className="panel-head">
+                <h2 id="fav-title" className="h2" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <Star size={18} aria-hidden="true" style={{ color: "var(--action)" }} /> Favoritos
+                </h2>
+                {favorites.length > 0 && (
+                  <Link href="/favoritos" className="link">
+                    Todos
+                  </Link>
+                )}
+              </div>
+              {favorites.length ? (
+                <ul style={{ display: "flex", flexDirection: "column" }}>
+                  {favorites.map((d) => {
+                    const cat = ref.categories.find((c) => c.id === d.category_id);
+                    return (
+                      <li key={d.id}>
+                        <Link href={`/d/${d.id}`} className="bar-row" style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                          <span className="op-swatch" style={{ "--c": cat?.color ?? "var(--ink-3)", width: 6, height: 16 } as React.CSSProperties} aria-hidden="true" />
+                          <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{d.title}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <p className="muted small">Marque a estrela de um documento para ter ele sempre à mão aqui.</p>
+              )}
+            </section>
+
             <section className="glass panel">
               <div className="panel-head">
                 <h2 className="h2">Por categoria</h2>
@@ -179,32 +209,6 @@ export default async function Dashboard() {
               />
               {ref.departments.every((d) => !counts.byDepartment.get(d.id)) && (
                 <p className="muted small">Nenhum documento ligado a um departamento ainda.</p>
-              )}
-            </section>
-
-            <section className="glass panel">
-              <div className="panel-head">
-                <h2 className="h2">Favoritos</h2>
-                {favorites.length > 0 && (
-                  <Link href="/favoritos" className="link">
-                    Todos
-                  </Link>
-                )}
-              </div>
-              {favorites.length ? (
-                <ul style={{ display: "flex", flexDirection: "column" }}>
-                  {favorites.map((d) => (
-                    <li key={d.id}>
-                      <Link href={`/d/${d.id}`} className="bar-row" style={{ display: "block" }}>
-                        {d.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="muted small">
-                  Marque a estrela de um documento para ter ele sempre à mão aqui.
-                </p>
               )}
             </section>
           </aside>

@@ -20,7 +20,7 @@ export function ReviewNotice({ id, since, canEdit }: { id: string; since: string
   }
 
   return (
-    <div className="notice no-print" style={{ margin: "16px 0 0", alignItems: "center", flexWrap: "wrap" }}>
+    <div className="notice no-print" style={{ margin: "0 0 24px", alignItems: "center", flexWrap: "wrap" }}>
       <CalendarClock size={18} aria-hidden="true" style={{ flex: "none" }} />
       <span style={{ flex: 1, minWidth: 200 }}>
         A revisão deste documento venceu em {since}. Confira se o conteúdo ainda está certo.
