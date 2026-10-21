@@ -1,0 +1,880 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T12:02:18.589Z",
+  "title": "Design System: DEVDOC",
+  "extensions": {
+    "colorMeta": {
+      "peretti-teal": {
+        "role": "primary",
+        "displayName": "Peretti Teal",
+        "canonical": "#1f6f6d",
+        "oklch": "oklch(49.5% 0.075 192.6)",
+        "tonalRamp": [
+          "oklch(15% 0.075 192.6)",
+          "oklch(26.4% 0.075 192.6)",
+          "oklch(37.9% 0.075 192.6)",
+          "oklch(49.3% 0.075 192.6)",
+          "oklch(60.7% 0.075 192.6)",
+          "oklch(72.1% 0.075 192.6)",
+          "oklch(83.6% 0.075 192.6)",
+          "oklch(95% 0.075 192.6)"
+        ]
+      },
+      "peretti-teal-deep": {
+        "role": "primary",
+        "displayName": "Peretti Teal Deep",
+        "canonical": "#175957",
+        "oklch": "oklch(42.4% 0.064 192)",
+        "tonalRamp": [
+          "oklch(15% 0.064 192)",
+          "oklch(26.4% 0.064 192)",
+          "oklch(37.9% 0.064 192)",
+          "oklch(49.3% 0.064 192)",
+          "oklch(60.7% 0.064 192)",
+          "oklch(72.1% 0.064 192)",
+          "oklch(83.6% 0.064 192)",
+          "oklch(95% 0.064 192)"
+        ]
+      },
+      "teal-mist-ink": {
+        "role": "primary",
+        "displayName": "Teal Mist Ink",
+        "canonical": "#f3fbfa",
+        "oklch": "oklch(98.2% 0.009 188.1)",
+        "tonalRamp": [
+          "oklch(15% 0.009 188.1)",
+          "oklch(26.4% 0.009 188.1)",
+          "oklch(37.9% 0.009 188.1)",
+          "oklch(49.3% 0.009 188.1)",
+          "oklch(60.7% 0.009 188.1)",
+          "oklch(72.1% 0.009 188.1)",
+          "oklch(83.6% 0.009 188.1)",
+          "oklch(95% 0.009 188.1)"
+        ]
+      },
+      "cathedral-blue": {
+        "role": "secondary",
+        "displayName": "Cathedral Blue (default --op light)",
+        "canonical": "#6f93c4",
+        "oklch": "oklch(65.6% 0.084 256.3)",
+        "tonalRamp": [
+          "oklch(15% 0.084 256.3)",
+          "oklch(26.4% 0.084 256.3)",
+          "oklch(37.9% 0.084 256.3)",
+          "oklch(49.3% 0.084 256.3)",
+          "oklch(60.7% 0.084 256.3)",
+          "oklch(72.1% 0.084 256.3)",
+          "oklch(83.6% 0.084 256.3)",
+          "oklch(95% 0.084 256.3)"
+        ]
+      },
+      "sky-counterlight": {
+        "role": "tertiary",
+        "displayName": "Sky Counterlight",
+        "canonical": "#7fb4d6",
+        "oklch": "oklch(74.5% 0.074 237.2)",
+        "tonalRamp": [
+          "oklch(15% 0.074 237.2)",
+          "oklch(26.4% 0.074 237.2)",
+          "oklch(37.9% 0.074 237.2)",
+          "oklch(49.3% 0.074 237.2)",
+          "oklch(60.7% 0.074 237.2)",
+          "oklch(72.1% 0.074 237.2)",
+          "oklch(83.6% 0.074 237.2)",
+          "oklch(95% 0.074 237.2)"
+        ]
+      },
+      "sand-counterlight": {
+        "role": "tertiary",
+        "displayName": "Sand Counterlight",
+        "canonical": "#efe3c2",
+        "oklch": "oklch(91.7% 0.045 90.4)",
+        "tonalRamp": [
+          "oklch(15% 0.045 90.4)",
+          "oklch(26.4% 0.045 90.4)",
+          "oklch(37.9% 0.045 90.4)",
+          "oklch(49.3% 0.045 90.4)",
+          "oklch(60.7% 0.045 90.4)",
+          "oklch(72.1% 0.045 90.4)",
+          "oklch(83.6% 0.045 90.4)",
+          "oklch(95% 0.045 90.4)"
+        ]
+      },
+      "green-grey-ground": {
+        "role": "neutral",
+        "displayName": "Green-Grey Ground",
+        "canonical": "#edf0ec",
+        "oklch": "oklch(95.2% 0.006 137.8)",
+        "tonalRamp": [
+          "oklch(15% 0.006 137.8)",
+          "oklch(26.4% 0.006 137.8)",
+          "oklch(37.9% 0.006 137.8)",
+          "oklch(49.3% 0.006 137.8)",
+          "oklch(60.7% 0.006 137.8)",
+          "oklch(72.1% 0.006 137.8)",
+          "oklch(83.6% 0.006 137.8)",
+          "oklch(95% 0.006 137.8)"
+        ]
+      },
+      "green-grey-ground-deep": {
+        "role": "neutral",
+        "displayName": "Ground Deep",
+        "canonical": "#e1e7e3",
+        "oklch": "oklch(92.2% 0.008 157.1)",
+        "tonalRamp": [
+          "oklch(15% 0.008 157.1)",
+          "oklch(26.4% 0.008 157.1)",
+          "oklch(37.9% 0.008 157.1)",
+          "oklch(49.3% 0.008 157.1)",
+          "oklch(60.7% 0.008 157.1)",
+          "oklch(72.1% 0.008 157.1)",
+          "oklch(83.6% 0.008 157.1)",
+          "oklch(95% 0.008 157.1)"
+        ]
+      },
+      "navy-ink": {
+        "role": "neutral",
+        "displayName": "Navy Ink",
+        "canonical": "#14284a",
+        "oklch": "oklch(28% 0.068 260.3)",
+        "tonalRamp": [
+          "oklch(15% 0.068 260.3)",
+          "oklch(26.4% 0.068 260.3)",
+          "oklch(37.9% 0.068 260.3)",
+          "oklch(49.3% 0.068 260.3)",
+          "oklch(60.7% 0.068 260.3)",
+          "oklch(72.1% 0.068 260.3)",
+          "oklch(83.6% 0.068 260.3)",
+          "oklch(95% 0.068 260.3)"
+        ]
+      },
+      "navy-ink-2": {
+        "role": "neutral",
+        "displayName": "Navy Ink 2",
+        "canonical": "#384a67",
+        "oklch": "oklch(40.7% 0.054 259.7)",
+        "tonalRamp": [
+          "oklch(15% 0.054 259.7)",
+          "oklch(26.4% 0.054 259.7)",
+          "oklch(37.9% 0.054 259.7)",
+          "oklch(49.3% 0.054 259.7)",
+          "oklch(60.7% 0.054 259.7)",
+          "oklch(72.1% 0.054 259.7)",
+          "oklch(83.6% 0.054 259.7)",
+          "oklch(95% 0.054 259.7)"
+        ]
+      },
+      "navy-ink-3": {
+        "role": "neutral",
+        "displayName": "Navy Ink 3",
+        "canonical": "#56667f",
+        "oklch": "oklch(50.7% 0.045 259.2)",
+        "tonalRamp": [
+          "oklch(15% 0.045 259.2)",
+          "oklch(26.4% 0.045 259.2)",
+          "oklch(37.9% 0.045 259.2)",
+          "oklch(49.3% 0.045 259.2)",
+          "oklch(60.7% 0.045 259.2)",
+          "oklch(72.1% 0.045 259.2)",
+          "oklch(83.6% 0.045 259.2)",
+          "oklch(95% 0.045 259.2)"
+        ]
+      },
+      "glass": {
+        "role": "neutral",
+        "displayName": "Glass",
+        "canonical": "rgba(250, 252, 250, 0.6)",
+        "oklch": "oklch(98.9% 0.003 145.5)",
+        "tonalRamp": [
+          "oklch(15% 0.003 145.5)",
+          "oklch(26.4% 0.003 145.5)",
+          "oklch(37.9% 0.003 145.5)",
+          "oklch(49.3% 0.003 145.5)",
+          "oklch(60.7% 0.003 145.5)",
+          "oklch(72.1% 0.003 145.5)",
+          "oklch(83.6% 0.003 145.5)",
+          "oklch(95% 0.003 145.5)"
+        ]
+      },
+      "glass-strong": {
+        "role": "neutral",
+        "displayName": "Glass Strong",
+        "canonical": "rgba(251, 252, 251, 0.86)",
+        "oklch": "oklch(99% 0.002 145.6)",
+        "tonalRamp": [
+          "oklch(15% 0.002 145.6)",
+          "oklch(26.4% 0.002 145.6)",
+          "oklch(37.9% 0.002 145.6)",
+          "oklch(49.3% 0.002 145.6)",
+          "oklch(60.7% 0.002 145.6)",
+          "oklch(72.1% 0.002 145.6)",
+          "oklch(83.6% 0.002 145.6)",
+          "oklch(95% 0.002 145.6)"
+        ]
+      },
+      "glass-hover": {
+        "role": "neutral",
+        "displayName": "Glass Hover",
+        "canonical": "rgba(255, 255, 255, 0.78)",
+        "oklch": "oklch(100% 0 89.9)",
+        "tonalRamp": [
+          "oklch(15% 0 89.9)",
+          "oklch(26.4% 0 89.9)",
+          "oklch(37.9% 0 89.9)",
+          "oklch(49.3% 0 89.9)",
+          "oklch(60.7% 0 89.9)",
+          "oklch(72.1% 0 89.9)",
+          "oklch(83.6% 0 89.9)",
+          "oklch(95% 0 89.9)"
+        ]
+      },
+      "luminous-edge": {
+        "role": "neutral",
+        "displayName": "Luminous Edge",
+        "canonical": "rgba(255, 255, 255, 0.82)",
+        "oklch": "oklch(100% 0 89.9)",
+        "tonalRamp": [
+          "oklch(15% 0 89.9)",
+          "oklch(26.4% 0 89.9)",
+          "oklch(37.9% 0 89.9)",
+          "oklch(49.3% 0 89.9)",
+          "oklch(60.7% 0 89.9)",
+          "oklch(72.1% 0 89.9)",
+          "oklch(83.6% 0 89.9)",
+          "oklch(95% 0 89.9)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "rgba(20, 40, 74, 0.1)",
+        "oklch": "oklch(28% 0.068 260.3)",
+        "tonalRamp": [
+          "oklch(15% 0.068 260.3)",
+          "oklch(26.4% 0.068 260.3)",
+          "oklch(37.9% 0.068 260.3)",
+          "oklch(49.3% 0.068 260.3)",
+          "oklch(60.7% 0.068 260.3)",
+          "oklch(72.1% 0.068 260.3)",
+          "oklch(83.6% 0.068 260.3)",
+          "oklch(95% 0.068 260.3)"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Line Strong",
+        "canonical": "rgba(20, 40, 74, 0.2)",
+        "oklch": "oklch(28% 0.068 260.3)",
+        "tonalRamp": [
+          "oklch(15% 0.068 260.3)",
+          "oklch(26.4% 0.068 260.3)",
+          "oklch(37.9% 0.068 260.3)",
+          "oklch(49.3% 0.068 260.3)",
+          "oklch(60.7% 0.068 260.3)",
+          "oklch(72.1% 0.068 260.3)",
+          "oklch(83.6% 0.068 260.3)",
+          "oklch(95% 0.068 260.3)"
+        ]
+      },
+      "ember-danger": {
+        "role": "status",
+        "displayName": "Ember",
+        "canonical": "#a33a27",
+        "oklch": "oklch(49.5% 0.143 32.4)",
+        "tonalRamp": [
+          "oklch(15% 0.143 32.4)",
+          "oklch(26.4% 0.143 32.4)",
+          "oklch(37.9% 0.143 32.4)",
+          "oklch(49.3% 0.143 32.4)",
+          "oklch(60.7% 0.143 32.4)",
+          "oklch(72.1% 0.143 32.4)",
+          "oklch(83.6% 0.143 32.4)",
+          "oklch(95% 0.143 32.4)"
+        ]
+      },
+      "leaf-ok": {
+        "role": "status",
+        "displayName": "Leaf",
+        "canonical": "#2b7350",
+        "oklch": "oklch(50% 0.092 159.1)",
+        "tonalRamp": [
+          "oklch(15% 0.092 159.1)",
+          "oklch(26.4% 0.092 159.1)",
+          "oklch(37.9% 0.092 159.1)",
+          "oklch(49.3% 0.092 159.1)",
+          "oklch(60.7% 0.092 159.1)",
+          "oklch(72.1% 0.092 159.1)",
+          "oklch(83.6% 0.092 159.1)",
+          "oklch(95% 0.092 159.1)"
+        ]
+      },
+      "code-night": {
+        "role": "neutral",
+        "displayName": "Code Night",
+        "canonical": "#0f1d33",
+        "oklch": "oklch(23.1% 0.047 259.1)",
+        "tonalRamp": [
+          "oklch(15% 0.047 259.1)",
+          "oklch(26.4% 0.047 259.1)",
+          "oklch(37.9% 0.047 259.1)",
+          "oklch(49.3% 0.047 259.1)",
+          "oklch(60.7% 0.047 259.1)",
+          "oklch(72.1% 0.047 259.1)",
+          "oklch(83.6% 0.047 259.1)",
+          "oklch(95% 0.047 259.1)"
+        ]
+      },
+      "code-ink": {
+        "role": "neutral",
+        "displayName": "Code Ink",
+        "canonical": "#dbe6f2",
+        "oklch": "oklch(92% 0.02 250.4)",
+        "tonalRamp": [
+          "oklch(15% 0.02 250.4)",
+          "oklch(26.4% 0.02 250.4)",
+          "oklch(37.9% 0.02 250.4)",
+          "oklch(49.3% 0.02 250.4)",
+          "oklch(60.7% 0.02 250.4)",
+          "oklch(72.1% 0.02 250.4)",
+          "oklch(83.6% 0.02 250.4)",
+          "oklch(95% 0.02 250.4)"
+        ]
+      },
+      "night-ground": {
+        "role": "neutral",
+        "displayName": "Night Ground",
+        "canonical": "#08111f",
+        "oklch": "oklch(17.7% 0.032 258.7)",
+        "tonalRamp": [
+          "oklch(15% 0.032 258.7)",
+          "oklch(26.4% 0.032 258.7)",
+          "oklch(37.9% 0.032 258.7)",
+          "oklch(49.3% 0.032 258.7)",
+          "oklch(60.7% 0.032 258.7)",
+          "oklch(72.1% 0.032 258.7)",
+          "oklch(83.6% 0.032 258.7)",
+          "oklch(95% 0.032 258.7)"
+        ]
+      },
+      "night-ground-deep": {
+        "role": "neutral",
+        "displayName": "Night Ground Deep",
+        "canonical": "#050b15",
+        "oklch": "oklch(14.8% 0.024 257.3)",
+        "tonalRamp": [
+          "oklch(15% 0.024 257.3)",
+          "oklch(26.4% 0.024 257.3)",
+          "oklch(37.9% 0.024 257.3)",
+          "oklch(49.3% 0.024 257.3)",
+          "oklch(60.7% 0.024 257.3)",
+          "oklch(72.1% 0.024 257.3)",
+          "oklch(83.6% 0.024 257.3)",
+          "oklch(95% 0.024 257.3)"
+        ]
+      },
+      "night-ink": {
+        "role": "neutral",
+        "displayName": "Night Ink",
+        "canonical": "#e6edf5",
+        "oklch": "oklch(94.3% 0.013 251.6)",
+        "tonalRamp": [
+          "oklch(15% 0.013 251.6)",
+          "oklch(26.4% 0.013 251.6)",
+          "oklch(37.9% 0.013 251.6)",
+          "oklch(49.3% 0.013 251.6)",
+          "oklch(60.7% 0.013 251.6)",
+          "oklch(72.1% 0.013 251.6)",
+          "oklch(83.6% 0.013 251.6)",
+          "oklch(95% 0.013 251.6)"
+        ]
+      },
+      "night-ink-2": {
+        "role": "neutral",
+        "displayName": "Night Ink 2",
+        "canonical": "#b4c3d6",
+        "oklch": "oklch(81.2% 0.032 254.3)",
+        "tonalRamp": [
+          "oklch(15% 0.032 254.3)",
+          "oklch(26.4% 0.032 254.3)",
+          "oklch(37.9% 0.032 254.3)",
+          "oklch(49.3% 0.032 254.3)",
+          "oklch(60.7% 0.032 254.3)",
+          "oklch(72.1% 0.032 254.3)",
+          "oklch(83.6% 0.032 254.3)",
+          "oklch(95% 0.032 254.3)"
+        ]
+      },
+      "night-ink-3": {
+        "role": "neutral",
+        "displayName": "Night Ink 3",
+        "canonical": "#8a9bb3",
+        "oklch": "oklch(68.4% 0.04 257)",
+        "tonalRamp": [
+          "oklch(15% 0.04 257)",
+          "oklch(26.4% 0.04 257)",
+          "oklch(37.9% 0.04 257)",
+          "oklch(49.3% 0.04 257)",
+          "oklch(60.7% 0.04 257)",
+          "oklch(72.1% 0.04 257)",
+          "oklch(83.6% 0.04 257)",
+          "oklch(95% 0.04 257)"
+        ]
+      },
+      "night-glass": {
+        "role": "neutral",
+        "displayName": "Night Glass",
+        "canonical": "rgba(16, 30, 52, 0.55)",
+        "oklch": "oklch(23.5% 0.047 259.1)",
+        "tonalRamp": [
+          "oklch(15% 0.047 259.1)",
+          "oklch(26.4% 0.047 259.1)",
+          "oklch(37.9% 0.047 259.1)",
+          "oklch(49.3% 0.047 259.1)",
+          "oklch(60.7% 0.047 259.1)",
+          "oklch(72.1% 0.047 259.1)",
+          "oklch(83.6% 0.047 259.1)",
+          "oklch(95% 0.047 259.1)"
+        ]
+      },
+      "night-edge": {
+        "role": "neutral",
+        "displayName": "Night Edge",
+        "canonical": "rgba(170, 210, 240, 0.13)",
+        "oklch": "oklch(84.5% 0.06 240.8)",
+        "tonalRamp": [
+          "oklch(15% 0.06 240.8)",
+          "oklch(26.4% 0.06 240.8)",
+          "oklch(37.9% 0.06 240.8)",
+          "oklch(49.3% 0.06 240.8)",
+          "oklch(60.7% 0.06 240.8)",
+          "oklch(72.1% 0.06 240.8)",
+          "oklch(83.6% 0.06 240.8)",
+          "oklch(95% 0.06 240.8)"
+        ]
+      },
+      "night-teal": {
+        "role": "primary",
+        "displayName": "Night Teal",
+        "canonical": "#5cbfb9",
+        "oklch": "oklch(74.4% 0.093 190.1)",
+        "tonalRamp": [
+          "oklch(15% 0.093 190.1)",
+          "oklch(26.4% 0.093 190.1)",
+          "oklch(37.9% 0.093 190.1)",
+          "oklch(49.3% 0.093 190.1)",
+          "oklch(60.7% 0.093 190.1)",
+          "oklch(72.1% 0.093 190.1)",
+          "oklch(83.6% 0.093 190.1)",
+          "oklch(95% 0.093 190.1)"
+        ]
+      },
+      "night-teal-bright": {
+        "role": "primary",
+        "displayName": "Night Teal Bright",
+        "canonical": "#7ad1cb",
+        "oklch": "oklch(80.4% 0.085 189.9)",
+        "tonalRamp": [
+          "oklch(15% 0.085 189.9)",
+          "oklch(26.4% 0.085 189.9)",
+          "oklch(37.9% 0.085 189.9)",
+          "oklch(49.3% 0.085 189.9)",
+          "oklch(60.7% 0.085 189.9)",
+          "oklch(72.1% 0.085 189.9)",
+          "oklch(83.6% 0.085 189.9)",
+          "oklch(95% 0.085 189.9)"
+        ]
+      },
+      "night-teal-ink": {
+        "role": "primary",
+        "displayName": "Night Teal Ink",
+        "canonical": "#04201f",
+        "oklch": "oklch(22.2% 0.034 191.7)",
+        "tonalRamp": [
+          "oklch(15% 0.034 191.7)",
+          "oklch(26.4% 0.034 191.7)",
+          "oklch(37.9% 0.034 191.7)",
+          "oklch(49.3% 0.034 191.7)",
+          "oklch(60.7% 0.034 191.7)",
+          "oklch(72.1% 0.034 191.7)",
+          "oklch(83.6% 0.034 191.7)",
+          "oklch(95% 0.034 191.7)"
+        ]
+      },
+      "night-ember": {
+        "role": "status",
+        "displayName": "Night Ember",
+        "canonical": "#ef8a73",
+        "oklch": "oklch(73.7% 0.128 33.8)",
+        "tonalRamp": [
+          "oklch(15% 0.128 33.8)",
+          "oklch(26.4% 0.128 33.8)",
+          "oklch(37.9% 0.128 33.8)",
+          "oklch(49.3% 0.128 33.8)",
+          "oklch(60.7% 0.128 33.8)",
+          "oklch(72.1% 0.128 33.8)",
+          "oklch(83.6% 0.128 33.8)",
+          "oklch(95% 0.128 33.8)"
+        ]
+      },
+      "night-leaf": {
+        "role": "status",
+        "displayName": "Night Leaf",
+        "canonical": "#7fd1a3",
+        "oklch": "oklch(79.5% 0.105 158.3)",
+        "tonalRamp": [
+          "oklch(15% 0.105 158.3)",
+          "oklch(26.4% 0.105 158.3)",
+          "oklch(37.9% 0.105 158.3)",
+          "oklch(49.3% 0.105 158.3)",
+          "oklch(60.7% 0.105 158.3)",
+          "oklch(72.1% 0.105 158.3)",
+          "oklch(83.6% 0.105 158.3)",
+          "oklch(95% 0.105 158.3)"
+        ]
+      },
+      "night-code": {
+        "role": "neutral",
+        "displayName": "Night Code",
+        "canonical": "#060d19",
+        "oklch": "oklch(15.9% 0.028 259.2)",
+        "tonalRamp": [
+          "oklch(15% 0.028 259.2)",
+          "oklch(26.4% 0.028 259.2)",
+          "oklch(37.9% 0.028 259.2)",
+          "oklch(49.3% 0.028 259.2)",
+          "oklch(60.7% 0.028 259.2)",
+          "oklch(72.1% 0.028 259.2)",
+          "oklch(83.6% 0.028 259.2)",
+          "oklch(95% 0.028 259.2)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page headings, reader document titles, editor title field."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "H2 inside rendered documents."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Panel and dialog headings."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "The lowercase devdoc wordmark only."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All UI text."
+      },
+      "reading": {
+        "displayName": "Reading",
+        "purpose": "Rendered document prose, max 72ch."
+      },
+      "row-title": {
+        "displayName": "Row Title",
+        "purpose": "Document row titles and button labels."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Sentence-case form labels, rail group toggles, palette group headings."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Code blocks, inline code, prompt variables, keyboard hints."
+      }
+    },
+    "vitralLight": {
+      "property": "@property --op { syntax: '<color>'; inherits: true; initial-value: #6f93c4; }",
+      "setter": "SetLight sets --op on document.body to the color of the current operation (or department, on filtered listings) and resets it to #6f93c4 on unmount. It is used in the reader, the editor, operation panels and filtered document lists.",
+      "bandField": "A fixed .vitral layer at z-index -1: a 102deg linear gradient of op, sky, op, navy, sand and op bands mixed at --band-strength (50% light, 54% dark), blurred 30px, with a radial ground-deep pool at the bottom.",
+      "palette": [
+        "#2E8C8A",
+        "#4F8FC0",
+        "#3F8F5E",
+        "#5B5FC7",
+        "#B08A3E",
+        "#24467A",
+        "#8A5CC2",
+        "#C0533A",
+        "#2F6F8F",
+        "#7A8B3C"
+      ]
+    },
+    "shadows": [
+      {
+        "name": "glass-rest",
+        "value": "inset 0 1px 0 rgba(255,255,255,0.7), 0 18px 40px -24px rgba(20,40,74,0.38), 0 2px 8px -4px rgba(20,40,74,0.08)",
+        "purpose": "Every glass panel; document images."
+      },
+      {
+        "name": "glass-rest-night",
+        "value": "inset 0 1px 0 rgba(255,255,255,0.04), 0 24px 48px -26px rgba(0,0,0,0.7)",
+        "purpose": "Glass panels in dark mode."
+      },
+      {
+        "name": "glass-pop",
+        "value": "0 30px 70px -30px rgba(20,40,74,0.5), 0 6px 18px -8px rgba(20,40,74,0.18)",
+        "purpose": "Dialogs (palette, new-document chooser), menus, drawer, editor toolbar."
+      },
+      {
+        "name": "glass-pop-night",
+        "value": "0 30px 80px -30px rgba(0,0,0,0.85), 0 8px 20px -10px rgba(0,0,0,0.5)",
+        "purpose": "Popovers in dark mode."
+      },
+      {
+        "name": "teal-glow",
+        "value": "0 10px 24px -14px color-mix(in oklab, var(--action) 80%, transparent)",
+        "purpose": "Primary button only."
+      },
+      {
+        "name": "pane-glow",
+        "value": "inset 0 0 0 1px rgba(255,255,255,0.28), 0 6px 14px -8px var(--c)",
+        "purpose": "Category panes, each glowing in its own tone."
+      },
+      {
+        "name": "code-well",
+        "value": "inset 0 0 0 1px rgba(160,200,240,0.12), 0 18px 34px -24px rgba(5,11,21,0.7)",
+        "purpose": "Code blocks."
+      },
+      {
+        "name": "focus-ring-field",
+        "value": "0 0 0 3px var(--action-soft)",
+        "purpose": "Focused fields and chip inputs, paired with a teal border."
+      }
+    ],
+    "materials": [
+      {
+        "name": "glass",
+        "value": "background: var(--glass); backdrop-filter: blur(22px) saturate(150%); border: 1px solid var(--edge); border-radius: 26px",
+        "purpose": "Panels, rail, search trigger."
+      },
+      {
+        "name": "glass-strong",
+        "value": "background: var(--glass-strong); backdrop-filter: blur(28px) saturate(160%); border: 1px solid var(--edge)",
+        "purpose": "Dialogs, menus, palette, toasts."
+      },
+      {
+        "name": "opaque-over-text",
+        "value": "background: color-mix(in oklab, var(--ground) 90%..99%, transparent)",
+        "purpose": "Sticky topbar and its frosted strip (90%, with a fading mask), editor toolbar (97%), mobile drawer (solid ground)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-glass",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Light crossfade, drawer slide, dialog and menu rise, toast rise."
+      },
+      {
+        "name": "light-crossfade",
+        "value": "--op 1.2s cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Recolors the band field when the context tone changes."
+      },
+      {
+        "name": "state",
+        "value": "0.18s",
+        "purpose": "Hover and focus transitions for color, background and border."
+      },
+      {
+        "name": "rise",
+        "value": "0.28s; from opacity 0, translateY(8px) scale(0.985)",
+        "purpose": "Dialogs; menus use 0.2s."
+      },
+      {
+        "name": "group-chevron",
+        "value": "transform 0.2s",
+        "purpose": "Rail group chevron rotates -90deg when collapsed."
+      },
+      {
+        "name": "drawer",
+        "value": "transform 0.35s",
+        "purpose": "Mobile rail slide-in."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all durations 0.01ms",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "rows-compact",
+        "value": "640px"
+      },
+      {
+        "name": "drawer",
+        "value": "960px"
+      },
+      {
+        "name": "single-column",
+        "value": "1180px"
+      }
+    ],
+    "themes": {
+      "light": "Default. :root[data-theme=light] forces light.",
+      "dark": "Applies under prefers-color-scheme: dark unless data-theme=light; :root[data-theme=dark] forces dark. The night-* tokens are the dark values of the same custom properties."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary-tall",
+      "description": "The single teal action; the tall variant is the topbar's Novo documento.",
+      "html": "<button class=\"ds-btn-primary\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><path d=\"M14 2v6h6M12 18v-6M9 15h6\"/></svg>Novo documento</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:8px;min-height:56px;padding:0 22px;border-radius:20px;border:1px solid transparent;background:var(--action, #1f6f6d);color:var(--action-ink, #f3fbfa);font-family:var(--font-ui, 'Albert Sans', sans-serif);font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 10px 24px -14px rgba(31,111,109,.8);transition:background .18s,transform .18s}.ds-btn-primary:hover{background:var(--action-hover, #175957)}.ds-btn-primary:active{transform:translateY(1px)}.ds-btn-primary:focus-visible{outline:2px solid var(--action, #1f6f6d);outline-offset:2px}"
+    },
+    {
+      "name": "Glass Button",
+      "kind": "button",
+      "refersTo": "button-glass",
+      "description": "Secondary actions on glass.",
+      "html": "<button class=\"ds-btn-glass\">Favoritar</button>",
+      "css": ".ds-btn-glass{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:14px;border:1px solid var(--edge, rgba(255,255,255,.82));background:var(--glass, rgba(250,252,250,.6));color:var(--ink, #14284a);backdrop-filter:blur(16px);font-weight:600;font-size:15px;cursor:pointer;transition:background .18s}.ds-btn-glass:hover{background:var(--glass-hover, rgba(255,255,255,.78))}.ds-btn-glass:focus-visible{outline:2px solid var(--action, #1f6f6d);outline-offset:2px}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Tertiary actions such as Limpar filtros.",
+      "html": "<button class=\"ds-btn-quiet\">Limpar filtros</button>",
+      "css": ".ds-btn-quiet{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:14px;border:1px solid transparent;background:transparent;color:var(--ink-2, #384a67);font-weight:600;font-size:15px;cursor:pointer;transition:background .18s,color .18s}.ds-btn-quiet:hover{background:var(--glass-hover, rgba(255,255,255,.78));color:var(--ink, #14284a)}.ds-btn-quiet:focus-visible{outline:2px solid var(--action, #1f6f6d);outline-offset:2px}"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Text input, select and chip-input shell.",
+      "html": "<label class=\"ds-label\">Título<input class=\"ds-field\" placeholder=\"Buscar no título, no texto e nas tags\"></label>",
+      "css": ".ds-label{display:block;font-size:14px;font-weight:600;color:var(--ink-2, #384a67)}.ds-field{display:block;width:100%;margin-top:8px;min-height:44px;padding:10px 14px;border-radius:14px;border:1px solid var(--line-strong, rgba(20,40,74,.2));background:rgba(251,252,251,.6);color:var(--ink, #14284a);font:inherit;font-size:15px;transition:border-color .18s,box-shadow .18s}.ds-field::placeholder{color:var(--ink-3, #56667f)}.ds-field:focus{outline:none;border-color:var(--action, #1f6f6d);box-shadow:0 0 0 3px var(--action-soft, rgba(31,111,109,.12))}"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Glass rail links with a collapsible group; the current page uses the navy fill, and each operation starts with a vertical tone swatch.",
+      "html": "<nav class=\"ds-rail\"><a class=\"ds-nav\" aria-current=\"page\" href=\"#\">Painel geral</a><a class=\"ds-nav\" href=\"#\">Documentos<span class=\"ds-count\">7</span></a><button class=\"ds-group\" aria-expanded=\"true\">Operações<svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m6 9 6 6 6-6\"/></svg></button><a class=\"ds-nav\" href=\"#\"><i class=\"ds-swatch\" style=\"--c:#2E8C8A\"></i>TS01<span class=\"ds-count\">2</span></a><a class=\"ds-nav\" href=\"#\"><i class=\"ds-swatch\" style=\"--c:#5B5FC7\"></i>INOVAÇÃO<span class=\"ds-count\">1</span></a></nav>",
+      "css": ".ds-rail{width:272px;padding:14px;border-radius:26px;background:var(--glass, rgba(250,252,250,.6));border:1px solid var(--edge, rgba(255,255,255,.82));backdrop-filter:blur(22px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 18px 40px -24px rgba(20,40,74,.38)}.ds-nav{display:flex;align-items:center;gap:12px;padding:7px 12px;border-radius:14px;color:var(--ink-2, #384a67);font-size:15px;font-weight:500;text-decoration:none;transition:background .18s,color .18s}.ds-nav:hover{background:var(--glass-hover, rgba(255,255,255,.78));color:var(--ink, #14284a)}.ds-nav[aria-current=page]{background:var(--ink, #14284a);color:var(--ground, #edf0ec)}.ds-nav:focus-visible,.ds-group:focus-visible{outline:2px solid var(--action, #1f6f6d);outline-offset:2px}.ds-count{margin-left:auto;font-size:13px;color:var(--ink-3, #56667f);font-variant-numeric:tabular-nums}.ds-group{display:flex;align-items:center;justify-content:space-between;width:calc(100% - 24px);margin:14px 12px 6px;padding:4px 0;border:0;border-radius:8px;background:none;font:inherit;font-size:13px;font-weight:600;color:var(--ink-3, #56667f);cursor:pointer}.ds-group:hover{color:var(--ink, #14284a)}.ds-swatch{width:9px;height:22px;border-radius:5px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}"
+    },
+    {
+      "name": "Tone Pill",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "Category, operation (with dot) and outline pills.",
+      "html": "<span class=\"ds-pill\" style=\"--c:#8A5CC2\">Prompt</span> <span class=\"ds-pill ds-dot\" style=\"--c:#2E8C8A\">TS01</span> <span class=\"ds-pill ds-outline\">#landing</span>",
+      "css": ".ds-pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:13px;font-weight:500;color:color-mix(in oklab,var(--c,#56667f) 62%,#14284a);background:color-mix(in oklab,var(--c,#56667f) 14%,transparent)}.ds-dot::before{content:\"\";width:7px;height:7px;border-radius:2px;background:var(--c)}.ds-outline{background:transparent;border:1px solid var(--line-strong, rgba(20,40,74,.2));color:var(--ink-2, #384a67)}"
+    },
+    {
+      "name": "Glass Panel",
+      "kind": "card",
+      "refersTo": "panel-glass",
+      "description": "The standard frosted surface.",
+      "html": "<section class=\"ds-panel\"><h2 class=\"ds-title\">Continue de onde parou</h2><p class=\"ds-muted\">Os documentos que você abriu por último.</p></section>",
+      "css": ".ds-panel{padding:24px;border-radius:26px;background:var(--glass, rgba(250,252,250,.6));border:1px solid var(--edge, rgba(255,255,255,.82));backdrop-filter:blur(22px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 18px 40px -24px rgba(20,40,74,.38),0 2px 8px -4px rgba(20,40,74,.08)}.ds-title{margin:0 0 8px;font-family:var(--font-display, 'Bricolage Grotesque', sans-serif);font-weight:600;font-size:21px;letter-spacing:-.015em;line-height:1.2;color:var(--ink, #14284a)}.ds-muted{margin:0;color:var(--ink-3, #56667f);font-size:15px}"
+    },
+    {
+      "name": "Document Row (dense)",
+      "kind": "custom",
+      "refersTo": "doc-row",
+      "description": "Furniture stays in fixed places: tone pane, title, pills and summary on one line, then meta.",
+      "html": "<a class=\"ds-row\" href=\"#\"><span class=\"ds-pane\" style=\"--c:#8A5CC2\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z\"/></svg></span><span class=\"ds-main\"><span class=\"ds-rt\">Briefing para landing page de campanha</span><span class=\"ds-line\"><span class=\"ds-p\" style=\"--c:#8A5CC2\">Prompt</span><span class=\"ds-sum\">Prompt com 5 variáveis para gerar o briefing completo.</span></span></span><span class=\"ds-meta\">há 2 horas</span></a>",
+      "css": ".ds-row{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:16px;align-items:center;padding:10px 14px;border-radius:18px;color:var(--ink, #14284a);text-decoration:none;transition:background .18s}.ds-row:hover{background:var(--glass-hover, rgba(255,255,255,.78))}.ds-row:focus-visible{outline:2px solid var(--action, #1f6f6d);outline-offset:2px}.ds-pane{width:30px;height:36px;border-radius:10px;display:grid;place-items:center;color:#fff;background:linear-gradient(160deg,color-mix(in oklab,var(--c) 78%,white) 0%,var(--c) 55%,color-mix(in oklab,var(--c) 78%,black) 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),0 6px 14px -8px var(--c)}.ds-main{min-width:0}.ds-rt{display:block;font-weight:600;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ds-line{display:flex;align-items:center;gap:6px;margin-top:4px;min-width:0}.ds-p{flex:none;display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;font-size:12.5px;font-weight:500;color:color-mix(in oklab,var(--c) 62%,#14284a);background:color-mix(in oklab,var(--c) 14%,transparent)}.ds-sum{margin-left:4px;font-size:13.5px;color:var(--ink-2, #384a67);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ds-meta{font-size:13px;color:var(--ink-3, #56667f);white-space:nowrap}"
+    },
+    {
+      "name": "Choice Card",
+      "kind": "custom",
+      "refersTo": "choice",
+      "description": "Selectable option card; used per category in the new-document chooser.",
+      "html": "<button class=\"ds-choice\" role=\"radio\" aria-checked=\"true\"><span class=\"ds-cpane\" style=\"--c:#2E8C8A\"></span><span><b>Código</b><small>Trechos com linguagem e cópia.</small></span></button>",
+      "css": ".ds-choice{display:flex;gap:12px;align-items:center;width:100%;max-width:280px;padding:12px 14px;border-radius:14px;border:1px solid var(--line, rgba(20,40,74,.1));background:transparent;color:var(--ink, #14284a);font:inherit;text-align:left;cursor:pointer;transition:border-color .18s,background .18s}.ds-choice:hover{background:var(--glass-hover, rgba(255,255,255,.78))}.ds-choice[aria-checked=true]{border-color:var(--action, #1f6f6d);background:var(--action-soft, rgba(31,111,109,.12))}.ds-choice:focus-visible{outline:2px solid var(--action, #1f6f6d);outline-offset:2px}.ds-choice b{display:block;font-weight:600}.ds-choice small{font-size:13px;color:var(--ink-3, #56667f)}.ds-cpane{flex:none;width:34px;height:40px;border-radius:10px;background:linear-gradient(160deg,color-mix(in oklab,var(--c) 78%,white),var(--c) 55%,color-mix(in oklab,var(--c) 78%,black));box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),0 6px 14px -8px var(--c)}"
+    },
+    {
+      "name": "Notice",
+      "kind": "custom",
+      "refersTo": "notice",
+      "description": "Inline status strip on a sand wash, used for review reminders.",
+      "html": "<p class=\"ds-notice\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/></svg><span>Revisão prevista para este documento.</span><button class=\"ds-nbtn\">Marcar como revisado</button></p>",
+      "css": ".ds-notice{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:14px 16px;border-radius:16px;background:color-mix(in oklab,var(--sand, #efe3c2) 45%,transparent);color:var(--ink, #14284a);font-size:14px}.ds-notice span{flex:1;min-width:200px}.ds-nbtn{min-height:36px;padding:0 12px;border-radius:12px;border:0;background:var(--action, #1f6f6d);color:var(--action-ink, #f3fbfa);font-weight:600;font-size:14px;cursor:pointer}.ds-nbtn:hover{background:var(--action-hover, #175957)}.ds-nbtn:focus-visible{outline:2px solid var(--action, #1f6f6d);outline-offset:2px}"
+    },
+    {
+      "name": "Code Block",
+      "kind": "custom",
+      "refersTo": "code-block",
+      "description": "Night-blue code well in both themes, with a mono head and a copy button.",
+      "html": "<div class=\"ds-code\"><div class=\"ds-code-head\"><span>typescript</span><button class=\"ds-copy\">Copiar</button></div><pre><span class=\"k\">export const</span> limite = <span class=\"n\">10</span>;</pre></div>",
+      "css": ".ds-code{border-radius:18px;background:var(--code-bg, #0f1d33);color:var(--code-ink, #dbe6f2);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(160,200,240,.12),0 18px 34px -24px rgba(5,11,21,.7)}.ds-code-head{display:flex;justify-content:space-between;align-items:center;padding:6px 6px 6px 16px;border-bottom:1px solid rgba(160,200,240,.1);font-family:var(--font-code, 'Spline Sans Mono', monospace);font-size:12.5px;color:#a9bcd3}.ds-copy{min-height:36px;padding:0 12px;border-radius:12px;border:0;background:transparent;color:#dbe6f2;font-weight:600;cursor:pointer}.ds-copy:hover{background:rgba(160,200,240,.12);color:#fff}.ds-copy:focus-visible{outline:2px solid #5cbfb9;outline-offset:2px}.ds-code pre{margin:0;padding:16px 18px 18px;font-family:var(--font-code, 'Spline Sans Mono', monospace);font-size:13.5px;line-height:1.65}.ds-code .k{color:#8fb8ff}.ds-code .n{color:#f2c879}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Vitral de Brasília",
+    "overview": "DEVDOC is light filtered through tinted glass, after Marianne Peretti's windows in the Brasília cathedral. Every surface is frosted glass floating over a fixed field of slow vertical bands of blue, green, white and sand light. The light is the system's identity: a registered color property (`--op`, default Cathedral Blue) feeds the bands, and opening an operation, a department listing, a document or the editor crossfades the bands to that operation's tone over 1.2s. Same building, different light.\n\nThe interface itself stays calm and dense enough for daily work by an internal team: a glass rail on the left, a sticky glass search bar with the teal primary action, a large Bricolage greeting, and document rows whose furniture (category pane, title, pills, summary, date) never moves. Navy ink on a green-grey ground in light mode; in dark mode it is the cathedral at night, a deep navy ground with the bands glowing through. Product UI copy is Brazilian Portuguese (pt-BR); this document is in English.\n\nThe owner's binding constraints shape the world: glassmorphism, both themes first-class, an off-white ground that is easy on the eyes, rounded corners, non-generic color and type, no eyebrow labels, generous spacing.",
+    "keyCharacteristics": [
+      "Frosted glass panels (22px blur, 150% saturate, 1px luminous edge) over a fixed band field.",
+      "One registered light color per context; only the light, swatches and tags take the operation tone.",
+      "A single teal action color, independent of the operation tone.",
+      "Navy ink fills mark \"you are here\" (active nav, active tab, pressed icon button).",
+      "Soft, deep, navy-tinted shadows; big radii (26px panels, 14px controls, pill tags).",
+      "Code lives in deep night-blue blocks in both themes."
+    ],
+    "rules": [
+      {
+        "name": "The Light Is Not the Button Rule",
+        "body": "The operation tone colors light, swatches, panes, pills and bars. It never colors an action, a link or a focus ring; those are always Peretti Teal, in every operation.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Light Rule",
+        "body": "Exactly one context tone drives `--op` at a time. Change it by setting `--op` on the body so the registered property crossfades (1.2s, cubic-bezier(0.16, 1, 0.3, 1)); never swap band gradients directly.",
+        "section": "colors"
+      },
+      {
+        "name": "The Navy Fill Rule",
+        "body": "\"You are here\" is a solid navy-ink fill with ground-colored text (active nav link, active tab, pressed icon button, active admin entry). Teal is for doing, navy is for being.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Is For Machines Rule",
+        "body": "Spline Sans Mono appears only in code blocks, inline code, prompt variables, keyboard hints and the raw editor. Never for labels, numbers or decoration.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Labels and group headings are sentence case at 13–14px semibold in muted ink, sitting directly above the thing they name. No uppercase tracked labels above headings.",
+        "section": "typography"
+      },
+      {
+        "name": "The Opaque Over Text Rule",
+        "body": "Glass is for surfaces over the light. Anything that sits over moving text (the sticky topbar, the editor toolbar, the mobile drawer) goes near-solid: ground at 90–99%, so nothing ghosts through.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Soft Drop Rule",
+        "body": "Shadows are large, negative-spread and navy-tinted. No hard offset shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do put every surface on glass over the band field, and paint the ground on `html` so the fixed band layer shows through a transparent body.",
+      "Do tint context by setting `--op` on the body; let the registered property crossfade over 1.2s with cubic-bezier(0.16, 1, 0.3, 1).",
+      "Do feed entity tones through a local `--c` and derive tints with `color-mix(in oklab, ...)` (14% pill fill, 12% bar track, 62% text mix).",
+      "Do use Peretti Teal for every action, link and focus ring, and the navy fill for every current-location state.",
+      "Do make surfaces that sit over scrolling text near-opaque (ground at 90–99%).",
+      "Do keep document rows' furniture in fixed positions: pane, title, summary, pills, meta.",
+      "Do design both themes together; dark is the cathedral at night (night-ground with bands at 54% strength), not an inverted light theme.",
+      "Do honor reduced motion: all transitions and animations collapse to near zero."
+    ],
+    "donts": [
+      "Don't color buttons, links or focus states with an operation tone.",
+      "Don't use a cream or warm-white ground; the ground is green-grey.",
+      "Don't use hard offset shadows or heavy borders; depth is blur, edge and soft drop.",
+      "Don't add uppercase tracked eyebrow labels above headings.",
+      "Don't use Spline Sans Mono outside code, prompt variables and keyboard hints.",
+      "Don't add a gray sidebar on a white page with a single blue accent; that is the Notion and Confluence look this world refuses.",
+      "Don't leave translucent glass over moving text where it ghosts."
+    ]
+  }
+}

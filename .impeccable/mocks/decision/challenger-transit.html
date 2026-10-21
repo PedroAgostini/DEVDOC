@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>DEVDOC metrô</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:"Fira Sans",sans-serif;color:#F4F1EA;background:#0F1B3D}
+.app{display:grid;grid-template-columns:230px 1fr 400px;gap:24px;padding:24px;height:900px}
+.g{background:rgba(244,241,234,.06);backdrop-filter:blur(16px);border:1px solid rgba(244,241,234,.12);border-radius:22px}
+nav{padding:26px 18px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+nav b{font-size:24px;margin:0 10px 24px}
+nav span{padding:10px 12px;border-radius:12px;color:#D3DCF2}
+nav .on{background:#F4F1EA;color:#0F1B3D;font-weight:600}
+main{display:flex;flex-direction:column;gap:20px}
+.search{padding:18px 22px;font-size:21px;color:#BFCBEA}
+h1{font-size:42px;font-weight:600;letter-spacing:-.02em}
+.map{flex:1;padding:20px;position:relative}
+.map svg{width:100%;height:100%}
+text{font-family:"Fira Sans";font-size:14px;fill:#F4F1EA}
+.list{padding:22px;display:flex;flex-direction:column;gap:4px}
+.list h2{font-size:20px;margin-bottom:10px}
+.it{padding:12px 0;border-bottom:1px solid rgba(244,241,234,.1)}
+.it b{display:block;font-size:16px;font-weight:600}
+.it small{font-size:13px;color:#BFCBEA}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+</style></head><body><div class="app">
+<nav class="g"><b>devdoc</b><span class="on">Painel geral</span><span>Documentos</span><span>Favoritos</span><span>Rascunhos</span></nav>
+<main>
+<div class="g search">Buscar estações, documentos e prompts</div>
+<h1>Seis linhas, 357 documentos</h1>
+<div class="g map"><svg viewBox="0 0 760 560">
+<g fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+<path d="M40 80 H300 L380 160 H720" stroke="#D7263D"/>
+<path d="M40 180 H260 L340 260 H720" stroke="#2B59C3"/>
+<path d="M40 280 H720" stroke="#F2A541"/>
+<path d="M40 380 H300 L380 300" stroke="#2E9E5B"/>
+<path d="M40 460 H500 L560 400 H720" stroke="#9B6DD6"/>
+<path d="M40 530 H720" stroke="#C9CFDD"/>
+</g>
+<g fill="#0F1B3D" stroke="#F4F1EA" stroke-width="4">
+<circle cx="140" cy="80" r="9"/><circle cx="460" cy="160" r="9"/><circle cx="620" cy="160" r="12" fill="#F4F1EA"/>
+<circle cx="160" cy="180" r="9"/><circle cx="520" cy="260" r="9"/><circle cx="260" cy="280" r="9"/><circle cx="560" cy="280" r="9"/>
+<circle cx="200" cy="380" r="9"/><circle cx="300" cy="460" r="9"/><circle cx="640" cy="400" r="9"/><circle cx="380" cy="530" r="9"/>
+</g>
+<text x="40" y="60">TS01  84</text><text x="40" y="160">TS02  71</text><text x="40" y="262">TS BRASIL  66</text><text x="40" y="362">INOVAÇÃO  58</text><text x="40" y="442">ADM  43</text><text x="40" y="512">DIRETORIA  35</text>
+<text x="570" y="196">Briefing landing page</text>
+</svg></div>
+</main>
+<aside class="g list"><h2>Últimas estações</h2>
+<div class="it"><b>Briefing para landing page</b><small><span class="dot" style="background:#D7263D"></span>Prompt · TS01 · há 2 h</small></div>
+<div class="it"><b>Hook de validação de CPF</b><small><span class="dot" style="background:#2B59C3"></span>Código · TS02 · ontem</small></div>
+<div class="it"><b>Erro 504 no checkout</b><small><span class="dot" style="background:#F2A541"></span>Resolução · TS BRASIL · seg</small></div>
+<div class="it"><b>Deploy na Vercel com Supabase</b><small><span class="dot" style="background:#2E9E5B"></span>Documentação · INOVAÇÃO · 12 out</small></div>
+<div class="it"><b>Fluxo de aprovação de orçamento</b><small><span class="dot" style="background:#9B6DD6"></span>Processo · ADM · 10 out</small></div>
+</aside>
+</div></body></html>

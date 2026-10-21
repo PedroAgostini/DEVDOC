@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>DEVDOC lâminas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:"Hanken Grotesk",sans-serif;color:#1C2027;background:#F2F0EA;
+background-image:radial-gradient(circle at 78% 12%,rgba(74,62,146,.10),transparent 38%),radial-gradient(circle at 30% 90%,rgba(46,111,159,.08),transparent 40%)}
+.mono{font-family:"Azeret Mono",monospace}
+.app{display:grid;grid-template-columns:248px 1fr 320px;gap:24px;padding:24px;height:900px}
+.glass{background:rgba(255,255,255,.55);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.8);box-shadow:0 10px 30px -12px rgba(28,32,39,.18);border-radius:22px}
+.rail{padding:24px 18px;display:flex;flex-direction:column;gap:6px}
+.brand{font-weight:700;font-size:24px;letter-spacing:-.02em;margin:0 8px 24px}
+.brand span{color:#4A3E92}
+.nav{padding:10px 12px;border-radius:12px;font-size:15px;color:#454B57;display:flex;justify-content:space-between}
+.nav.on{background:#4A3E92;color:#fff}
+.group{margin:22px 12px 6px;font-size:13px;color:#6B7180}
+.op{display:flex;align-items:center;gap:10px}
+.op i{width:8px;height:8px;border-radius:2px;background:#9AA0AC}
+main{display:flex;flex-direction:column;gap:24px;min-width:0}
+.search{display:flex;align-items:center;gap:14px;padding:18px 22px}
+.search b{font-weight:500;font-size:22px;color:#6B7180;flex:1}
+.kbd{font-size:12px;padding:4px 8px;border-radius:8px;border:1px solid rgba(28,32,39,.15)}
+.btn{background:#1C2027;color:#F2F0EA;border-radius:14px;padding:12px 18px;font-weight:600;font-size:15px}
+h1{font-size:40px;letter-spacing:-.03em;font-weight:700;margin-top:8px}
+h2{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.slides{display:flex;flex-direction:column;gap:14px}
+.slide{display:grid;grid-template-columns:150px 1fr auto;align-items:stretch;border-radius:18px;overflow:hidden;min-height:92px}
+.frost{position:relative;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;font-size:12px;color:#fff;
+background-image:radial-gradient(rgba(255,255,255,.35) 1px,transparent 1.2px);background-size:4px 4px}
+.frost.v{background-color:#4A3E92}.frost.p{background-color:#A8436A}.frost.b{background-color:#2E6F9F}.frost.r{background-color:#A9483A}
+.body{padding:16px 22px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.title{font-size:19px;font-weight:600}
+.sum{font-size:14px;color:#565C68}
+.meta{padding:16px 22px;font-size:13px;color:#6B7180;text-align:right;display:flex;flex-direction:column;justify-content:center;gap:4px}
+aside{display:flex;flex-direction:column;gap:24px}
+.panel{padding:22px}
+.legend{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.leg{display:flex;align-items:center;gap:12px;font-size:15px}
+.leg i{width:26px;height:12px;border-radius:4px}
+.leg span{margin-left:auto;color:#6B7180;font-size:13px}
+.fav{font-size:15px;padding:10px 0;border-bottom:1px solid rgba(28,32,39,.08)}
+</style></head><body>
+<div class="app">
+<nav class="glass rail">
+<div class="brand">dev<span>doc</span></div>
+<div class="nav on">Painel geral</div>
+<div class="nav">Todos os documentos <span>357</span></div>
+<div class="nav">Favoritos <span>12</span></div>
+<div class="nav">Meus rascunhos <span>3</span></div>
+<div class="group">Operações</div>
+<div class="nav op"><span class="op"><i></i>TS01</span><span>84</span></div>
+<div class="nav op"><span class="op"><i></i>TS02</span><span>71</span></div>
+<div class="nav op"><span class="op"><i></i>TS BRASIL</span><span>66</span></div>
+<div class="nav op"><span class="op"><i></i>INOVAÇÃO</span><span>58</span></div>
+<div class="nav op"><span class="op"><i></i>ADM</span><span>43</span></div>
+<div class="nav op"><span class="op"><i></i>DIRETORIA</span><span>35</span></div>
+</nav>
+<main>
+<div class="glass search"><b>Buscar documentos, prompts e códigos</b><span class="kbd mono">Ctrl K</span><span class="btn">Novo documento</span></div>
+<h1>Bom dia, Pedro</h1>
+<h2>Continue de onde parou</h2>
+<div class="slides">
+<div class="glass slide"><div class="frost v mono"><span>PROMPT</span><span>TS01 · v4</span></div><div class="body"><div class="title">Briefing para landing page de campanha</div><div class="sum">Prompt com 5 variáveis: cliente, oferta, público, tom e prazo.</div></div><div class="meta"><span>Ana Ribeiro</span><span>há 2 h</span></div></div>
+<div class="glass slide"><div class="frost b mono"><span>CÓDIGO</span><span>TS02 · TSX</span></div><div class="body"><div class="title">Hook de validação de CPF em React</div><div class="sum">useCpf com máscara, dígito verificador e mensagem de erro.</div></div><div class="meta"><span>Lucas Moura</span><span>ontem</span></div></div>
+<div class="glass slide"><div class="frost r mono"><span>RESOLUÇÃO</span><span>TS BRASIL</span></div><div class="body"><div class="title">Erro 504 no checkout após atualização do tema</div><div class="sum">Causa: webhook síncrono no pedido. Correção em 3 passos.</div></div><div class="meta"><span>Pedro Agostini</span><span>seg</span></div></div>
+<div class="glass slide"><div class="frost p mono"><span>DOCUMENTAÇÃO</span><span>INOVAÇÃO</span></div><div class="body"><div class="title">Deploy na Vercel com variáveis do Supabase</div><div class="sum">Do repositório ao domínio, com chaves separadas por ambiente.</div></div><div class="meta"><span>Marina Costa</span><span>12 out</span></div></div>
+</div>
+</main>
+<aside>
+<div class="glass panel"><h2>Categorias</h2><div class="legend">
+<div class="leg"><i style="background:#C85A80"></i>Documentação<span>128</span></div>
+<div class="leg"><i style="background:#4A3E92"></i>Prompt<span>64</span></div>
+<div class="leg"><i style="background:#2E6F9F"></i>Código<span>92</span></div>
+<div class="leg"><i style="background:#A9483A"></i>Resolução de problemas<span>41</span></div>
+<div class="leg"><i style="background:#3F7D6B"></i>Processo<span>23</span></div>
+<div class="leg"><i style="background:#B98A2E"></i>Onboarding<span>9</span></div>
+</div></div>
+<div class="glass panel"><h2>Favoritos</h2><div style="margin-top:10px">
+<div class="fav">Checklist de publicação de site</div><div class="fav">Prompt de revisão de texto SEO</div><div class="fav">Padrão de commits do time</div></div></div>
+</aside>
+</div>
+</body></html>

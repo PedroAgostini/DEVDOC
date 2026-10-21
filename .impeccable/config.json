@@ -1,0 +1,62 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/assigned.html"
+        ],
+        "createdAt": "2026-10-20T19:09:51.091Z",
+        "reason": "brief pins it: user asked for an off-white light palette that is easy on the eyes (PRODUCT.md Brand Commitments)"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/challenger-acetate.html"
+        ],
+        "createdAt": "2026-10-20T19:09:51.142Z",
+        "reason": "brief pins it: user asked for an off-white light palette that is easy on the eyes (PRODUCT.md Brand Commitments)"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/assigned.html"
+        ],
+        "createdAt": "2026-10-21T11:19:22.313Z",
+        "reason": "unchosen decision sketch from the direction round; its fonts belong to that alternative, not to the shipped world"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/challenger-acetate.html"
+        ],
+        "createdAt": "2026-10-21T11:19:22.357Z",
+        "reason": "unchosen decision sketch from the direction round; its fonts belong to that alternative, not to the shipped world"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/challenger-specimen.html"
+        ],
+        "createdAt": "2026-10-21T11:19:22.398Z",
+        "reason": "unchosen decision sketch from the direction round; its fonts belong to that alternative, not to the shipped world"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/challenger-transit.html"
+        ],
+        "createdAt": "2026-10-21T11:19:22.440Z",
+        "reason": "unchosen decision sketch from the direction round; its fonts belong to that alternative, not to the shipped world"
+      }
+    ]
+  }
+}

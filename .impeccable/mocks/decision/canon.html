@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>DEVDOC padrão</title>
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#1F2328;background:#FAFAF8}
+.app{display:grid;grid-template-columns:260px 1fr;height:900px}
+nav{background:#F1F1EE;padding:22px 14px;display:flex;flex-direction:column;gap:2px;font-size:14px}
+nav b{font-size:18px;margin:0 10px 20px}
+nav span{padding:8px 10px;border-radius:8px;color:#3D434B}
+nav .on{background:#E3E5E8;color:#1F2328;font-weight:600}
+nav small{margin:18px 10px 6px;font-size:12px;color:#5B616A}
+main{padding:32px 56px;display:flex;flex-direction:column;gap:26px}
+.top{display:flex;gap:12px}
+.s{flex:1;border:1px solid #D9DCE0;border-radius:12px;padding:12px 16px;font-size:15px;color:#5B616A;background:rgba(255,255,255,.7)}
+.b{background:#2F5FC4;color:#fff;border-radius:12px;padding:12px 18px;font-size:14px;font-weight:600}
+h1{font-size:34px;font-weight:700;letter-spacing:-.02em}
+h2{font-size:18px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.c{border:1px solid #E3E5E8;border-radius:14px;padding:18px;background:rgba(255,255,255,.75)}
+.c b{display:block;font-size:16px;margin-bottom:6px}
+.c p{font-size:13px;color:#5B616A}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:12px 8px;border-bottom:1px solid #E9EBEE}
+td:last-child{color:#5B616A;text-align:right}
+</style></head><body><div class="app">
+<nav><b>DEVDOC</b><span class="on">Início</span><span>Documentos</span><span>Favoritos</span><span>Rascunhos</span>
+<small>Operações</small><span>TS01</span><span>TS02</span><span>TS BRASIL</span><span>INOVAÇÃO</span><span>ADM</span><span>DIRETORIA</span></nav>
+<main>
+<div class="top"><div class="s">Buscar</div><div class="b">Novo documento</div></div>
+<h1>Bom dia, Pedro</h1>
+<h2>Abertos recentemente</h2>
+<div class="grid">
+<div class="c"><b>Briefing para landing page</b><p>Prompt · TS01 · há 2 h</p></div>
+<div class="c"><b>Hook de validação de CPF</b><p>Código · TS02 · ontem</p></div>
+<div class="c"><b>Erro 504 no checkout</b><p>Resolução · TS BRASIL · seg</p></div>
+</div>
+<h2>Atualizados recentemente</h2>
+<table>
+<tr><td>Deploy na Vercel com variáveis do Supabase</td><td>Documentação</td><td>INOVAÇÃO</td><td>12 out</td></tr>
+<tr><td>Fluxo de aprovação de orçamento</td><td>Processo</td><td>ADM</td><td>10 out</td></tr>
+<tr><td>Prompt de análise de concorrência</td><td>Prompt</td><td>INOVAÇÃO</td><td>9 out</td></tr>
+<tr><td>Boas-vindas ao time</td><td>Onboarding</td><td>DIRETORIA</td><td>1 out</td></tr>
+</table>
+</main></div></body></html>
