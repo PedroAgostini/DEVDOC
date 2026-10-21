@@ -125,6 +125,7 @@ export default async function DocumentPage({ params }: { params: Promise<{ id: s
             canEdit={canEdit}
             canPin={canEdit && !!doc.operation_id}
             pinned={doc.pinned}
+            isAuthor={loaded.isAuthor}
           />
         </div>
 

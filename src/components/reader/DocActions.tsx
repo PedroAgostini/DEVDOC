@@ -2,8 +2,22 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, useTransition } from "react";
-import { Download, FileArchive, FileDown, FileText, History, PencilLine, Pin, PinOff, Star, Trash2 } from "lucide-react";
-import { recordView, toggleFavorite, togglePin, trashDocument } from "@/app/actions/documents";
+import { useFormStatus } from "react-dom";
+import {
+  BookmarkPlus,
+  Download,
+  FileArchive,
+  FileDown,
+  FileText,
+  History,
+  Loader2,
+  PencilLine,
+  Pin,
+  PinOff,
+  Star,
+  Trash2,
+} from "lucide-react";
+import { recordView, saveCopy, toggleFavorite, togglePin, trashDocument } from "@/app/actions/documents";
 
 interface Props {
   id: string;
@@ -11,9 +25,25 @@ interface Props {
   canEdit: boolean;
   canPin: boolean;
   pinned: boolean;
+  isAuthor: boolean;
 }
 
-export function DocActions({ id, favorite, canEdit, canPin, pinned }: Props) {
+function SaveCopyButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      type="submit"
+      className="btn btn-glass btn-sm"
+      disabled={pending}
+      title="Cria uma cópia privada que você pode editar"
+    >
+      {pending ? <Loader2 size={16} className="spin" /> : <BookmarkPlus size={16} />}
+      Salvar para mim
+    </button>
+  );
+}
+
+export function DocActions({ id, favorite, canEdit, canPin, pinned, isAuthor }: Props) {
   const [fav, setFav] = useState(favorite);
   const [pin, setPin] = useState(pinned);
   const [menu, setMenu] = useState(false);
@@ -61,6 +91,12 @@ export function DocActions({ id, favorite, canEdit, canPin, pinned }: Props) {
         <Link href={`/d/${id}/editar`} className="btn btn-primary btn-sm">
           <PencilLine size={16} /> Editar
         </Link>
+      )}
+
+      {!isAuthor && (
+        <form action={saveCopy.bind(null, id)}>
+          <SaveCopyButton />
+        </form>
       )}
 
       <div ref={menuRef} style={{ position: "relative" }}>

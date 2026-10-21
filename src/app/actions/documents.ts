@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getMe, getReference, getSupabase, getMembers } from "@/lib/data";
-import { levelFromFile, visibilityFromFile, type DocMeta } from "@/lib/markdown";
+import { imageUrls, levelFromFile, visibilityFromFile, type DocMeta } from "@/lib/markdown";
 import type { Level, Visibility } from "@/lib/types";
 import { fail, type ActionResult } from "./util";
 
@@ -226,6 +226,55 @@ export async function quickSearch(q: string): Promise<QuickResult[]> {
     ...d,
     title: (d.status === "draft" ? d.draft_title : d.title) || d.title || "Sem título",
   }));
+}
+
+/** Private, editable copy of a readable document, with its images copied too. */
+export async function saveCopy(sourceId: string) {
+  const { me, supabase } = await session();
+  const { data: src } = await supabase
+    .from("documents")
+    .select("id,title,summary,content_md,category_id,operation_id,department_id,tags,status")
+    .eq("id", sourceId)
+    .maybeSingle();
+  if (!src || src.status !== "published") throw new Error("Documento não encontrado.");
+
+  const { data: created, error } = await supabase
+    .from("documents")
+    .insert({
+      author_id: me.id,
+      category_id: src.category_id,
+      operation_id: src.operation_id,
+      department_id: src.department_id,
+      tags: src.tags,
+      visibility: "private",
+      draft_title: src.title,
+      draft_summary: src.summary,
+      draft_md: "",
+      draft_updated_at: new Date().toISOString(),
+    })
+    .select("id")
+    .single();
+  if (error || !created) throw new Error(fail(error?.message).error);
+
+  // Images move with the copy, so it keeps working if the original changes access.
+  let body: string = src.content_md;
+  const prefix = `/api/img/${src.id}/`;
+  for (const url of imageUrls(body)) {
+    if (!url.startsWith(prefix)) continue;
+    const name = url.slice(prefix.length);
+    const { error: copyError } = await supabase.storage
+      .from("doc-images")
+      .copy(`${src.id}/${name}`, `${created.id}/${name}`);
+    if (!copyError) body = body.replaceAll(url, `/api/img/${created.id}/${name}`);
+  }
+
+  const note = `> Cópia pessoal de [${src.title}](/d/${src.id}). Só você vê esta versão.\n\n`;
+  await supabase.from("documents").update({ draft_md: note + body }).eq("id", created.id);
+  const published = await supabase.rpc("publish_document", { doc_id: created.id });
+  if (published.error) throw new Error(fail(published.error.message).error);
+
+  revalidatePath("/", "layout");
+  redirect(`/d/${created.id}/editar`);
 }
 
 /** Published documents to link to: recent ones for an empty query, else search results. */

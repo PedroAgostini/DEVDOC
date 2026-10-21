@@ -38,10 +38,11 @@ if (reset) {
   console.log("Documentos, imagens e buscas antigas removidos.");
 }
 
-const [{ data: cats }, { data: ops }, { data: deps }] = await Promise.all([
+const [{ data: cats }, { data: ops }, { data: deps }, { data: groups }] = await Promise.all([
   sb.from("categories").select("id,slug"),
   sb.from("operations").select("id,name,slug").order("sort"),
   sb.from("departments").select("id,name,slug").order("sort"),
+  sb.from("groups").select("id,operation_id,department_id"),
 ]);
 const onboarding = cats.find((c) => c.slug === "onboarding")?.id ?? null;
 
@@ -351,6 +352,9 @@ for (const op of ops ?? []) {
     summary: `Primeiros passos para quem chega na operação ${op.name}.`,
     tags: ["onboarding", "operacao"],
     operation: op.id,
+    // Only people of this operation (its automatic group) can read it.
+    visibility: "groups",
+    group: (g) => g.operation_id === op.id,
     body: `Bem-vindo à operação **${op.name}**. Este documento reúne o que você precisa para começar, e o painel da operação (na barra lateral) mostra o resto: documentos fixados, clientes atendidos e pessoas.${focus ? `\n\nA ${op.name} concentra ${focus}.` : ""}
 
 ## A completar pelo gestor
@@ -378,7 +382,7 @@ for (const op of ops ?? []) {
 - **Prompts** que funcionaram bem para os clientes da operação
 - **Códigos** e configurações reutilizáveis
 
-Documentos da operação que valem para todos podem ficar visíveis para "Todos". O que é só da equipe, use "Grupos" e escolha ${op.name}.
+Este documento só aparece para quem é da operação ${op.name}. Faça o mesmo com o que for só da equipe: em "Quem pode ver", use "Grupos" e escolha ${op.name}. O que vale para todos pode ficar visível para "Todos".
 
 Antes de começar, leia também @@guia@@.`,
   });
@@ -454,6 +458,9 @@ for (const dep of deps ?? []) {
     summary: `O que o departamento ${dep.name} guarda no DEVDOC e por onde começar.`,
     tags: ["onboarding", "departamento"],
     department: dep.id,
+    // Only people of this department (its automatic group) can read it.
+    visibility: "groups",
+    group: (g) => g.department_id === dep.id,
     body: `Bem-vindo ao departamento **${dep.name}**. Todo documento marcado com o departamento ${dep.name} aparece em Departamentos > ${dep.name}, na barra lateral.
 
 ## A completar pelo gestor
@@ -476,7 +483,7 @@ for (const dep of deps ?? []) {
 
 ${c.store.map((s) => `- ${s.charAt(0).toUpperCase()}${s.slice(1)}`).join("\n")}
 
-Para algo que só o departamento deve ver, escolha "Grupos" e selecione ${dep.name}.
+Este documento só aparece para quem é do departamento ${dep.name}. Para algo que só o departamento deve ver, faça o mesmo: em "Quem pode ver", escolha "Grupos" e selecione ${dep.name}.
 
 ## Prompt de partida
 
@@ -517,6 +524,12 @@ for (const [i, d] of docs.entries()) {
     .single();
   if (error) throw new Error(`${d.title}: ${error.message}`);
   ids.set(d.key, { id: data.id, title: d.title, at });
+  if (d.group) {
+    const g = (groups ?? []).find(d.group);
+    if (!g) throw new Error(`${d.title}: grupo automático não encontrado`);
+    const link = await sb.from("document_groups").insert({ document_id: data.id, group_id: g.id });
+    if (link.error) throw new Error(`${d.title}: ${link.error.message}`);
+  }
 }
 
 // Resolve @@key@@ into Markdown links, then record version 1 with the final text.
