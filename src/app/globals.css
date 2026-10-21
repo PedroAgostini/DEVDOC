@@ -68,7 +68,8 @@
     --danger-soft: rgba(239, 138, 115, 0.12);
     --ok: #7fd1a3;
     --code-bg: #060d19;
-    --band-strength: 54%;
+    --band-strength: 26%;
+    --sand: #8f8873;
     color-scheme: dark;
   }
 }
@@ -95,7 +96,8 @@
   --danger-soft: rgba(239, 138, 115, 0.12);
   --ok: #7fd1a3;
   --code-bg: #060d19;
-  --band-strength: 54%;
+  --band-strength: 26%;
+  --sand: #8f8873;
   color-scheme: dark;
 }
 
