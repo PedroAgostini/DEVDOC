@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ArrowRight, Mail } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { safePath } from "@/lib/format";
 
 const ERRORS: Record<string, string> = {
   "sem-acesso": "Esse e-mail não tem acesso ao DEVDOC. Peça a um Admin ou Master para liberar.",
@@ -40,7 +41,7 @@ export function LoginForm({ erro, voltar }: { erro?: string; voltar?: string }) 
   const [error, setError] = useState(erro ? ERRORS[erro] ?? null : null);
   const [sent, setSent] = useState<string | null>(null);
 
-  const next = voltar?.startsWith("/") ? voltar : "/";
+  const next = safePath(voltar);
   const supabase = createClient();
 
   async function google() {
@@ -169,6 +170,9 @@ export function LoginForm({ erro, voltar }: { erro?: string; voltar?: string }) 
       >
         {mode === "password" ? "Primeiro acesso ou esqueceu a senha?" : "Voltar para e-mail e senha"}
       </button>
+      <p className="muted small" style={{ marginTop: 18 }}>
+        Ao entrar, seus dados são tratados conforme o <a className="link" href="/privacidade">aviso de privacidade</a>.
+      </p>
     </section>
   );
 }

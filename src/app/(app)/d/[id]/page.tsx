@@ -39,7 +39,7 @@ export default async function DocumentPage({ params }: { params: Promise<{ id: s
   const [ref, members, events, backlinkRows] = await Promise.all([
     getReference(),
     getMembers(),
-    supabase.from("doc_events").select("kind,member_id").eq("document_id", id).gte("created_at", since),
+    supabase.from("doc_events").select("kind,member_hash").eq("document_id", id).gte("created_at", since),
     supabase
       .from("doc_links")
       .select("source:documents!doc_links_source_id_fkey(id,title,category_id)")
@@ -48,11 +48,11 @@ export default async function DocumentPage({ params }: { params: Promise<{ id: s
   const backlinks = ((backlinkRows.data ?? []) as unknown as { source: { id: string; title: string; category_id: string | null } | null }[])
     .map((r) => r.source)
     .filter((s): s is { id: string; title: string; category_id: string | null } => !!s);
-  const usage = ((events.data ?? []) as { kind: string; member_id: string | null }[]).reduce(
+  const usage = ((events.data ?? []) as { kind: string; member_hash: string | null }[]).reduce(
     (acc, e) => {
       if (e.kind === "view") {
         acc.views += 1;
-        if (e.member_id) acc.people.add(e.member_id);
+        if (e.member_hash) acc.people.add(e.member_hash);
       } else acc.copies += 1;
       return acc;
     },

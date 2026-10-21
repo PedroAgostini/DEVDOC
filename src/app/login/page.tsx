@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getMe } from "@/lib/data";
+import { safePath } from "@/lib/format";
 import { LoginForm } from "./LoginForm";
 
 export const metadata = { title: "Entrar" };
@@ -11,7 +12,7 @@ export default async function LoginPage({
 }) {
   const sp = await searchParams;
   const me = await getMe();
-  if (me && sp.erro !== "sem-acesso") redirect(sp.voltar?.startsWith("/") ? sp.voltar : "/");
+  if (me && sp.erro !== "sem-acesso") redirect(safePath(sp.voltar));
 
   return (
     <main

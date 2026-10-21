@@ -19,7 +19,9 @@ export async function uploadImage(docId: string, file: File | Blob, fileName = "
     blob = await imageCompression(asFile, {
       maxSizeMB: 1.5,
       maxWidthOrHeight: 2200,
-      useWebWorker: true,
+      // The worker mode downloads the library from a public CDN; staying on the main thread
+      // keeps every script first-party and lets the CSP block third-party code.
+      useWebWorker: false,
       fileType: "image/webp",
       initialQuality: 0.86,
     });

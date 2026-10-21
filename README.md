@@ -108,6 +108,18 @@ Cada documento escolhe quem pode ler: **todos**, **a partir de um nível**, **gr
 
 <br />
 
+## Segurança e LGPD
+
+- Permissões verificadas no Postgres (RLS) em todas as tabelas; documento privado não é lido nem por administradores
+- Métricas de uso pseudonimizadas com hash SHA-256 e segredo; retenção automática de 90 dias a 12 meses
+- Trilha de auditoria de acessos, níveis, visibilidade e compartilhamentos, visível só para Masters
+- Cabeçalhos de segurança (CSP, HSTS, anti-iframe), senhas fortes e nenhum script de terceiros
+- Aviso de privacidade e "Baixar meus dados" para os direitos do titular
+
+Detalhes em [docs/SEGURANCA.md](docs/SEGURANCA.md) (plano de segurança e resposta a incidentes) e [docs/LGPD.md](docs/LGPD.md) (registro das operações de tratamento).
+
+<br />
+
 ## Stack
 
 | | |

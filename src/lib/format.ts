@@ -47,6 +47,12 @@ export function initials(name: string) {
   return ((parts[0]?.[0] ?? "") + (parts.length > 1 ? parts[parts.length - 1][0] : "")).toUpperCase() || "?";
 }
 
+/** Only same-site paths: "//evil.com" or "/\evil.com" would leave the app after login. */
+export function safePath(path: string | null | undefined, fallback = "/") {
+  if (!path || !path.startsWith("/") || path.startsWith("//") || path.startsWith("/\\")) return fallback;
+  return path;
+}
+
 export function plural(n: number, one: string, many: string) {
   return `${n.toLocaleString("pt-BR")} ${n === 1 ? one : many}`;
 }

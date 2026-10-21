@@ -13,7 +13,10 @@ export default function SetPasswordPage() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (password.length < 8) return setError("Use pelo menos 8 caracteres.");
+    if (password.length < 10) return setError("Use pelo menos 10 caracteres.");
+    if (!/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/\d/.test(password)) {
+      return setError("Misture letras minúsculas, maiúsculas e números.");
+    }
     if (password !== confirm) return setError("As duas senhas não são iguais.");
     setBusy(true);
     setError(null);
@@ -39,7 +42,7 @@ export default function SetPasswordPage() {
         <div>
           <label className="label" htmlFor="nova">Nova senha</label>
           <input id="nova" className="field" type="password" autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          <p className="hint">Pelo menos 8 caracteres.</p>
+          <p className="hint">Pelo menos 10 caracteres, com letras minúsculas, maiúsculas e números.</p>
         </div>
         <div>
           <label className="label" htmlFor="repetir">Repita a senha</label>

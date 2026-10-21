@@ -1,11 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
+import { safePath } from "@/lib/format";
 
 export async function GET(request: NextRequest) {
   const url = request.nextUrl;
-  const next = url.searchParams.get("next");
-  const safeNext = next?.startsWith("/") ? next : "/";
+  const safeNext = safePath(url.searchParams.get("next"));
   const failure = (reason: string) => NextResponse.redirect(new URL(`/login?erro=${reason}`, url.origin));
 
   const providerError = url.searchParams.get("error_description") ?? url.searchParams.get("error");

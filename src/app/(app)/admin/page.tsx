@@ -15,6 +15,7 @@ import {
 } from "@/app/actions/admin";
 import { getCounts, getMembers, getReference, getSupabase, requireMe } from "@/lib/data";
 import { LEVEL_RANK } from "@/lib/types";
+import { longDate } from "@/lib/format";
 
 export const metadata = { title: "Administração" };
 
@@ -26,6 +27,68 @@ const TABS = [
   { id: "categorias", label: "Categorias" },
   { id: "grupos", label: "Grupos" },
 ];
+
+interface AuditRow {
+  id: number;
+  at: string;
+  action: string;
+  entity: string;
+  detail: Record<string, string>;
+  actor: { full_name: string; email: string } | null;
+}
+
+async function AuditTable() {
+  const supabase = await getSupabase();
+  const { data } = await supabase
+    .from("audit_log")
+    .select("id,at,action,entity,detail,actor:members(full_name,email)")
+    .order("at", { ascending: false })
+    .limit(300);
+  const rows = (data ?? []) as unknown as AuditRow[];
+  return (
+    <section className="glass panel">
+      <div className="panel-head" style={{ alignItems: "flex-start" }}>
+        <div>
+          <h2 className="h2">Auditoria</h2>
+          <p className="muted small" style={{ marginTop: 4, maxWidth: "64ch" }}>
+            Quem liberou ou mudou acessos, níveis, visibilidade e compartilhamentos. Só Masters veem esta lista, ninguém
+            consegue editá-la, e documentos privados aparecem sem título.
+          </p>
+        </div>
+      </div>
+      {rows.length ? (
+        <div style={{ overflowX: "auto" }}>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Quando</th>
+                <th>Quem</th>
+                <th>O que</th>
+                <th>Detalhe</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.id}>
+                  <td className="small tabular" style={{ whiteSpace: "nowrap" }}>{longDate(r.at)}</td>
+                  <td className="small">{r.actor?.full_name || r.actor?.email || "Sistema"}</td>
+                  <td>{r.action}</td>
+                  <td className="small muted">
+                    {Object.entries(r.detail ?? {})
+                      .map(([k, v]) => `${k}: ${v}`)
+                      .join(" · ")}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p className="muted">Nada registrado ainda.</p>
+      )}
+    </section>
+  );
+}
 
 export default async function AdminPage({ searchParams }: { searchParams: Promise<{ aba?: string }> }) {
   const me = await requireMe();
@@ -59,7 +122,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
       </section>
 
       <nav className="glass tabs" aria-label="Seções" style={{ alignSelf: "flex-start", maxWidth: "100%" }}>
-        {TABS.map((t) => (
+        {[...TABS, ...(me.level === "master" ? [{ id: "auditoria", label: "Auditoria" }] : [])].map((t) => (
           <Link key={t.id} href={`/admin?aba=${t.id}`} className="tab" aria-current={aba === t.id ? "page" : undefined}>
             {t.label}
           </Link>
@@ -158,6 +221,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           onDelete={deleteCategory}
         />
       )}
+      {aba === "auditoria" && me.level === "master" && <AuditTable />}
       {aba === "grupos" && (
         <GroupsAdmin
           groups={ref.groups}

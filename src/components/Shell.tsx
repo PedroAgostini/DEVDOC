@@ -14,6 +14,7 @@ import {
   PencilLine,
   Search,
   Settings2,
+  ShieldCheck,
   Star,
   Trash2,
   Upload,
@@ -146,6 +147,10 @@ export function Shell({ me, operations, departments, categories, counts, canAdmi
               <BarChart3 size={18} /> Métricas
             </Link>
           )}
+
+          <Link href="/privacidade" className="nav-link" aria-current={current("/privacidade")}>
+            <ShieldCheck size={18} /> Privacidade e meus dados
+          </Link>
 
           <NavGroup id="operacoes" label="Operações" defaultOpen forceOpen={pathname.startsWith("/operacoes/")}>
             {operations.map((o) => (
