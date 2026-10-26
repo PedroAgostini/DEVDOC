@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getMe } from "@/lib/data";
 import { safePath } from "@/lib/format";
+import { DevCredit } from "@/components/DevCredit";
 import { LoginForm } from "./LoginForm";
 
 export const metadata = { title: "Entrar" };
@@ -45,6 +46,7 @@ export default async function LoginPage({
         </p>
       </section>
       <LoginForm erro={sp.erro} voltar={sp.voltar} />
+      <DevCredit className="dev-credit-page" />
     </main>
   );
 }

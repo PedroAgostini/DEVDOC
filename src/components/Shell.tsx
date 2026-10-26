@@ -23,6 +23,7 @@ import { signOut } from "@/app/actions/admin";
 import { initials } from "@/lib/format";
 import { LEVEL_LABEL, type Category, type Department, type Level, type Operation } from "@/lib/types";
 import { CommandPalette } from "./CommandPalette";
+import { DevCredit } from "./DevCredit";
 import { NewDocChooser } from "./NewDocChooser";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -215,6 +216,7 @@ export function Shell({ me, operations, departments, categories, counts, canAdmi
             </button>
           </form>
         </div>
+        <DevCredit className="dev-credit-rail" />
       </nav>
 
       <div className="workspace">
