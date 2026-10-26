@@ -75,6 +75,9 @@ function inviteReason(message: string) {
   if (/not authorized|authorized/i.test(message)) {
     return "o e-mail padrão do Supabase só envia para quem faz parte do projeto no Supabase. Configure um SMTP próprio em Authentication > SMTP";
   }
+  if (/error sending/i.test(message)) {
+    return "o servidor de e-mail (SMTP) recusou o envio. Confira o usuário e a senha de app em Supabase > Authentication > Emails > SMTP Settings";
+  }
   if (/already been registered|email_exists|already registered/i.test(message)) {
     return "essa pessoa já ativou a conta. Se esqueceu a senha, ela usa “Primeiro acesso ou esqueceu a senha?” na tela de login";
   }
