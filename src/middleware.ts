@@ -39,7 +39,7 @@ export async function middleware(request: NextRequest) {
 
   // Everyone uses two-step verification. Until the session reaches aal2 the database
   // treats the person as a stranger anyway; this sends them to the screen that fixes it.
-  const MFA_FREE = ["/auth/mfa", "/auth/callback", "/login", "/privacidade"];
+  const MFA_FREE = ["/auth/mfa", "/auth/callback", "/auth/confirmar", "/login", "/privacidade"];
   if (user && !MFA_FREE.some((p) => path === p || path.startsWith(`${p}/`))) {
     const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
     if (aal?.currentLevel !== "aal2") {

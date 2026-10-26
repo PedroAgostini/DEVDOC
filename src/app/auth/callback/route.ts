@@ -25,7 +25,9 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
     if (error) return failure("link");
   } else {
-    return failure("link");
+    // No code in the query: the session may be in the #fragment (server-made invitations).
+    // Browsers keep the fragment across this redirect, and the page reads it.
+    return NextResponse.redirect(new URL(`/auth/confirmar?next=${encodeURIComponent(safeNext)}`, url.origin));
   }
 
   return NextResponse.redirect(new URL(safeNext, url.origin));
