@@ -307,17 +307,18 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
                     {!m.active ? "Desativado" : signedIn.includes(m.id) ? "Ativo" : "Convite pendente"}
                   </td>
                   <td style={{ textAlign: "right" }}>
-                    <div style={{ display: "inline-flex", gap: 4 }}>
+                    <div style={{ display: "inline-flex", gap: 4, alignItems: "center" }}>
                       {m.active && !signedIn.includes(m.id) && (
                         <button
                           type="button"
-                          className="icon-btn"
-                          aria-label={`Reenviar convite para ${m.full_name || m.email}`}
+                          className="btn btn-glass btn-sm"
+                          style={{ whiteSpace: "nowrap", marginRight: 4 }}
+                          aria-label={`Reenviar e-mail de convite para ${m.full_name || m.email}`}
                           title="Reenviar convite"
                           disabled={pending}
                           onClick={() => run(() => resendInvite(m.id), () => setMessage({ text: `Convite reenviado para ${m.email}.` }))}
                         >
-                          <Send size={16} aria-hidden="true" />
+                          <Send size={15} aria-hidden="true" /> Reenviar e-mail
                         </button>
                       )}
                       {canTouch(m) && (
