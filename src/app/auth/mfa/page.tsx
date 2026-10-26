@@ -1,5 +1,6 @@
 "use client";
 
+import { DevCredit } from "@/components/DevCredit";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Loader2, LogOut, ShieldCheck } from "lucide-react";
@@ -113,7 +114,7 @@ function Mfa() {
   );
 
   return (
-    <main style={{ minHeight: "100dvh", display: "grid", placeItems: "center", padding: 16 }}>
+    <main className="solo-page">
       <section
         className="glass-strong panel mfa-card"
         style={{ width: mode === "enroll" ? "min(820px, 100%)" : "min(440px, 100%)", padding: "clamp(20px, 3.5vw, 36px)" }}
@@ -174,6 +175,7 @@ function Mfa() {
           </button>
         </footer>
       </section>
+      <DevCredit compact />
     </main>
   );
 }

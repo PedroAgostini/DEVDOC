@@ -1,5 +1,6 @@
 "use client";
 
+import { DevCredit } from "@/components/DevCredit";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -31,7 +32,7 @@ export default function SetPasswordPage() {
   }
 
   return (
-    <main style={{ minHeight: "100dvh", display: "grid", placeItems: "center", padding: 16 }}>
+    <main className="solo-page">
       <form onSubmit={submit} className="glass-strong panel" style={{ width: "min(440px, 100%)", padding: 36, display: "flex", flexDirection: "column", gap: 16 }}>
         <div>
           <h1 className="h2" style={{ fontSize: 26 }}>Crie sua senha</h1>
@@ -53,6 +54,7 @@ export default function SetPasswordPage() {
           Salvar e entrar
         </button>
       </form>
+      <DevCredit compact />
     </main>
   );
 }

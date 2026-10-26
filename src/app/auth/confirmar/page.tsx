@@ -1,5 +1,6 @@
 "use client";
 
+import { DevCredit } from "@/components/DevCredit";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Loader2 } from "lucide-react";
@@ -43,10 +44,11 @@ function Confirm() {
   }, [supabase, router, params]);
 
   return (
-    <main style={{ minHeight: "100dvh", display: "grid", placeItems: "center", padding: 16 }}>
+    <main className="solo-page">
       <p className="muted" style={{ display: "flex", gap: 8, alignItems: "center" }}>
         <Loader2 size={16} className="spin" /> Entrando
       </p>
+      <DevCredit compact />
     </main>
   );
 }

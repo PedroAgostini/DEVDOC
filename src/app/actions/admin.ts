@@ -36,7 +36,7 @@ export async function inviteMember(input: {
   level: Level;
   operations: string[];
   departments: string[];
-}): Promise<ActionResult<{ emailSent: boolean }>> {
+}): Promise<ActionResult<{ emailSent: boolean; reason?: string }>> {
   const { me, supabase } = await adminSession();
   const email = input.email.trim().toLowerCase();
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { ok: false, error: "Digite um e-mail válido." };
@@ -62,20 +62,50 @@ export async function inviteMember(input: {
   }
 
   // The invitation email is a convenience: Google login or "receber link" also work.
-  let emailSent = false;
+  const invite = await sendInvite(email, input.full_name.trim());
+  revalidatePath("/admin");
+  return { ok: true, data: { emailSent: invite.sent, reason: invite.sent ? undefined : invite.reason } };
+}
+
+/** Plain-language reason for a failed invitation email. */
+function inviteReason(message: string) {
+  if (/rate limit/i.test(message)) {
+    return "o limite de e-mails por hora foi atingido. Tente de novo mais tarde; com um SMTP próprio configurado no Supabase o limite deixa de ser um problema";
+  }
+  if (/not authorized|authorized/i.test(message)) {
+    return "o e-mail padrão do Supabase só envia para quem faz parte do projeto no Supabase. Configure um SMTP próprio em Authentication > SMTP";
+  }
+  if (/already been registered|email_exists|already registered/i.test(message)) {
+    return "essa pessoa já ativou a conta. Se esqueceu a senha, ela usa “Primeiro acesso ou esqueceu a senha?” na tela de login";
+  }
+  return message;
+}
+
+async function sendInvite(email: string, fullName: string): Promise<{ sent: true } | { sent: false; reason: string }> {
   try {
     const admin = createAdminClient();
     const origin = await siteOrigin();
     const res = await admin.auth.admin.inviteUserByEmail(email, {
       redirectTo: `${origin}/auth/callback?next=/auth/definir-senha`,
-      data: { full_name: input.full_name.trim() },
+      data: { full_name: fullName },
     });
-    emailSent = !res.error;
-  } catch {
-    emailSent = false;
+    return res.error ? { sent: false, reason: inviteReason(res.error.message) } : { sent: true };
+  } catch (e) {
+    return { sent: false, reason: e instanceof Error ? e.message : "erro desconhecido" };
   }
+}
+
+/** Sends the invitation again to someone who has not signed in yet (lost or expired email). */
+export async function resendInvite(memberId: string): Promise<ActionResult> {
+  const { me, supabase } = await adminSession();
+  if (LEVEL_RANK[me.level] < LEVEL_RANK.admin) return { ok: false, error: "Só Admin ou Master reenvia convites." };
+  const { data: m } = await supabase.from("members").select("email, full_name, active").eq("id", memberId).single();
+  if (!m) return { ok: false, error: "Pessoa não encontrada." };
+  if (!m.active) return { ok: false, error: "Reative o acesso antes de reenviar o convite." };
+  const invite = await sendInvite(m.email, m.full_name);
+  if (!invite.sent) return { ok: false, error: `O convite não saiu: ${invite.reason}.` };
   revalidatePath("/admin");
-  return { ok: true, data: { emailSent } };
+  return { ok: true };
 }
 
 export async function updateMember(

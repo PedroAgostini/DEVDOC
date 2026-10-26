@@ -2070,7 +2070,28 @@ button.pill {
   grid-column: 1 / -1;
   justify-self: center;
 }
-.dev-credit-rail {
-  align-self: center;
-  margin-top: 8px;
+
+.dev-credit-compact {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px;
+}
+.dev-credit-compact .dev-credit-name {
+  font-size: 14px;
+}
+.page-credit {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0 8px;
+}
+
+/* Standalone screens (two-step verification, password): card centered, credit at the foot. */
+.solo-page {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+  gap: 12px;
+  padding: 16px;
 }

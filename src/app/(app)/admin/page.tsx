@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { GroupsAdmin } from "@/components/admin/GroupsAdmin";
 import { ListAdmin } from "@/components/admin/ListAdmin";
 import { PeopleAdmin } from "@/components/admin/PeopleAdmin";
+import { createAdminClient } from "@/lib/supabase/admin";
 import {
   deleteCategory,
   deleteClient,
@@ -114,6 +115,18 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
       .map((g) => [g.id, g.operation_id ? opPeople[g.operation_id] ?? 0 : depPeople[g.department_id!] ?? 0]),
   );
 
+  // Who has signed in at least once; the rest still have a pending invitation.
+  let signedIn: string[] = [];
+  if (aba === "pessoas") {
+    try {
+      const { data } = await createAdminClient().auth.admin.listUsers({ perPage: 1000 });
+      const seen = new Set(data.users.filter((u) => u.last_sign_in_at).map((u) => u.id));
+      signedIn = members.filter((m) => m.auth_user_id && seen.has(m.auth_user_id)).map((m) => m.id);
+    } catch {
+      signedIn = members.filter((m) => m.auth_user_id).map((m) => m.id);
+    }
+  }
+
   return (
     <div className="stack">
       <section style={{ paddingTop: 8 }}>
@@ -138,6 +151,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           departments={ref.departments}
           myLevel={me.level}
           myId={me.id}
+          signedIn={signedIn}
         />
       )}
       {aba === "departamentos" && (

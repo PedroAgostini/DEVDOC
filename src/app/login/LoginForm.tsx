@@ -16,6 +16,9 @@ function translate(message: string) {
   if (/Invalid login credentials/i.test(message)) return "E-mail ou senha incorretos.";
   if (/Database error|DEVDOC_NOT_INVITED|Signups not allowed/i.test(message)) return ERRORS["sem-acesso"];
   if (/Email not confirmed/i.test(message)) return "Confirme seu e-mail pelo link que enviamos.";
+  if (/email rate limit/i.test(message)) {
+    return "O limite de e-mails por hora foi atingido. Tente de novo mais tarde, ou peça a um Admin para reenviar seu convite.";
+  }
   if (/rate limit|too many/i.test(message)) return "Muitas tentativas. Espere um minuto e tente de novo.";
   if (/provider is not enabled/i.test(message)) return "O login com Google ainda não foi ativado. Use e-mail e senha.";
   return message;

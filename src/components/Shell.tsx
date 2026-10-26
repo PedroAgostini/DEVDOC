@@ -216,7 +216,6 @@ export function Shell({ me, operations, departments, categories, counts, canAdmi
             </button>
           </form>
         </div>
-        <DevCredit className="dev-credit-rail" />
       </nav>
 
       <div className="workspace">
@@ -244,6 +243,9 @@ export function Shell({ me, operations, departments, categories, counts, canAdmi
           </button>
         </header>
         <main id="conteudo">{children}</main>
+        <footer className="page-credit no-print">
+          <DevCredit />
+        </footer>
       </div>
 
       <CommandPalette

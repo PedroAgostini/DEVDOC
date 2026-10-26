@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { ArrowRightLeft, Check, MailCheck, Pencil, ShieldOff, Trash2, UserPlus, X } from "lucide-react";
-import { deleteMember, inviteMember, resetMfa, transferDocuments, updateMember } from "@/app/actions/admin";
+import { ArrowRightLeft, Check, MailCheck, Pencil, Send, ShieldOff, Trash2, UserPlus, X } from "lucide-react";
+import { deleteMember, inviteMember, resendInvite, resetMfa, transferDocuments, updateMember } from "@/app/actions/admin";
 import { MultiPicker } from "@/components/ui/MultiPicker";
 import { initials } from "@/lib/format";
 import { LEVEL_LABEL, LEVELS, type Department, type Level, type Member, type Operation } from "@/lib/types";
@@ -15,11 +15,13 @@ interface Props {
   departments: Department[];
   myLevel: Level;
   myId: string;
+  /** Members who have signed in at least once. Everyone else still has a pending invitation. */
+  signedIn: string[];
 }
 
 const EMPTY_INVITE = { email: "", full_name: "", level: "operacao" as Level, operations: [] as string[], departments: [] as string[] };
 
-export function PeopleAdmin({ members, memberOps, memberDeps, operations, departments, myLevel, myId }: Props) {
+export function PeopleAdmin({ members, memberOps, memberDeps, operations, departments, myLevel, myId, signedIn }: Props) {
   const isMaster = myLevel === "master";
   const allowedLevels = LEVELS.filter((l) => isMaster || l === "operacao" || l === "gestor");
   const opsOf = (id: string) => memberOps.filter((m) => m.member_id === id).map((m) => m.operation_id);
@@ -96,11 +98,14 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
             run(
               () => inviteMember(invite),
               (data) => {
-                setMessage({
-                  text: data?.emailSent
-                    ? `Acesso liberado. Enviamos um convite para ${invite.email}.`
-                    : `Acesso liberado para ${invite.email}. A pessoa entra com Google ou pede um link na tela de login.`,
-                });
+                setMessage(
+                  data?.emailSent
+                    ? { text: `Acesso liberado. Enviamos um convite para ${invite.email}.` }
+                    : {
+                        text: `Acesso liberado para ${invite.email}, mas o convite não saiu: ${data?.reason ?? "erro desconhecido"}. Depois, use “Reenviar convite” na lista.`,
+                        error: true,
+                      },
+                );
                 setInvite(EMPTY_INVITE);
                 setInviteOpen(false);
               },
@@ -299,10 +304,22 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
                     </span>
                   </td>
                   <td className="small">
-                    {!m.active ? "Desativado" : m.auth_user_id ? "Ativo" : "Aguardando primeiro acesso"}
+                    {!m.active ? "Desativado" : signedIn.includes(m.id) ? "Ativo" : "Convite pendente"}
                   </td>
                   <td style={{ textAlign: "right" }}>
                     <div style={{ display: "inline-flex", gap: 4 }}>
+                      {m.active && !signedIn.includes(m.id) && (
+                        <button
+                          type="button"
+                          className="icon-btn"
+                          aria-label={`Reenviar convite para ${m.full_name || m.email}`}
+                          title="Reenviar convite"
+                          disabled={pending}
+                          onClick={() => run(() => resendInvite(m.id), () => setMessage({ text: `Convite reenviado para ${m.email}.` }))}
+                        >
+                          <Send size={16} aria-hidden="true" />
+                        </button>
+                      )}
                       {canTouch(m) && (
                         <button type="button" className="icon-btn" aria-label={`Editar ${m.full_name || m.email}`} title="Editar" disabled={pending} onClick={() => edit(m)}>
                           <Pencil size={16} />

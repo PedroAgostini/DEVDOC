@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, Download } from "lucide-react";
+import { DevCredit } from "@/components/DevCredit";
 import { getMe } from "@/lib/data";
 import { fullDay } from "@/lib/format";
 import { LEGAL } from "@/lib/legal";
@@ -147,6 +148,9 @@ export default async function PrivacyPage() {
           </p>
         </div>
       </article>
+      <footer className="page-credit">
+        <DevCredit />
+      </footer>
     </main>
   );
 }

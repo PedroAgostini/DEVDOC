@@ -1,8 +1,8 @@
 /** Author credit. Inline GitHub mark: brand icons are not in lucide. */
-export function DevCredit({ className = "" }: { className?: string }) {
+export function DevCredit({ className = "", compact = false }: { className?: string; compact?: boolean }) {
   return (
     <a
-      className={`dev-credit ${className}`}
+      className={`dev-credit${compact ? " dev-credit-compact" : ""} ${className}`.trim()}
       href="https://github.com/PedroAgostini/"
       target="_blank"
       rel="noopener noreferrer"
