@@ -110,6 +110,7 @@ Cada documento escolhe quem pode ler: **todos**, **a partir de um nível**, **gr
 
 ## Segurança e LGPD
 
+- Verificação em duas etapas (app autenticador) obrigatória para todos, exigida pelo próprio banco
 - Permissões verificadas no Postgres (RLS) em todas as tabelas; documento privado não é lido nem por administradores
 - Métricas de uso pseudonimizadas com hash SHA-256 e segredo; retenção automática de 90 dias a 12 meses
 - Trilha de auditoria de acessos, níveis, visibilidade e compartilhamentos, visível só para Masters
@@ -179,7 +180,9 @@ Importe o repositório e configure as variáveis (valores em **Supabase > Projec
 ```bash
 node --env-file=.env.production.local scripts/create-master.mjs voce@empresa.com.br "Seu Nome"
 ```
-Depois entre com Google, ou use "Primeiro acesso" na tela de login.
+Depois entre com Google, ou use "Primeiro acesso" na tela de login. No primeiro acesso o DEVDOC pede para configurar a verificação em duas etapas com um app autenticador.
+
+No Supabase, em **Authentication > Multi-Factor**, deixe o app autenticador (TOTP) ativado.
 
 <br />
 

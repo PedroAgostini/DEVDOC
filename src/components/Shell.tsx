@@ -185,15 +185,17 @@ export function Shell({ me, operations, departments, categories, counts, canAdmi
         </div>
 
         <div className="rail-foot">
-          <span className="avatar" style={{ "--c": "var(--ink)", color: "var(--ground)" } as React.CSSProperties} aria-hidden="true">
-            {me.avatar_url ? <img src={me.avatar_url} alt="" /> : initials(me.full_name || me.email)}
-          </span>
-          <span style={{ minWidth: 0, flex: 1, lineHeight: 1.25 }}>
-            <span className="doc-title" style={{ display: "block", fontSize: 14 }}>
-              {me.full_name || me.email}
+          <Link href="/perfil" className="rail-me" aria-current={current("/perfil")} title="Meu perfil">
+            <span className="avatar" style={{ "--c": "var(--ink)", color: "var(--ground)" } as React.CSSProperties} aria-hidden="true">
+              {me.avatar_url ? <img src={me.avatar_url} alt="" /> : initials(me.full_name || me.email)}
             </span>
-            <span className="muted small">{LEVEL_LABEL[me.level]}</span>
-          </span>
+            <span style={{ minWidth: 0, flex: 1, lineHeight: 1.25 }}>
+              <span className="doc-title" style={{ display: "block", fontSize: 14 }}>
+                {me.full_name || me.email}
+              </span>
+              <span className="muted small">{LEVEL_LABEL[me.level]}</span>
+            </span>
+          </Link>
           {canAdmin && (
             <Link
               href="/admin"

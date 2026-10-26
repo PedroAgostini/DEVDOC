@@ -80,9 +80,32 @@ export async function inviteMember(input: {
 
 export async function updateMember(
   id: string,
-  patch: { full_name?: string; level?: Level; active?: boolean; operations?: string[]; departments?: string[] },
+  patch: { full_name?: string; email?: string; level?: Level; active?: boolean; operations?: string[]; departments?: string[] },
 ): Promise<ActionResult> {
-  const { supabase } = await adminSession();
+  const { me, supabase } = await adminSession();
+
+  // Email: only a Master, and the login email changes together with the record.
+  if (patch.email !== undefined) {
+    const email = patch.email.trim().toLowerCase();
+    const { data: target } = await supabase.from("members").select("email, auth_user_id").eq("id", id).single();
+    if (target && email !== target.email) {
+      if (me.level !== "master") return { ok: false, error: "Só um Master altera o e-mail." };
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { ok: false, error: "Digite um e-mail válido." };
+      const admin = createAdminClient();
+      if (target.auth_user_id) {
+        const auth = await admin.auth.admin.updateUserById(target.auth_user_id, { email, email_confirm: true });
+        if (auth.error) {
+          return { ok: false, error: /already|exists|registered/i.test(auth.error.message) ? "Esse e-mail já está em uso." : auth.error.message };
+        }
+      }
+      const { error } = await supabase.from("members").update({ email }).eq("id", id);
+      if (error) {
+        if (target.auth_user_id) await admin.auth.admin.updateUserById(target.auth_user_id, { email: target.email, email_confirm: true });
+        return fail(/duplicate|unique/i.test(error.message) ? "Esse e-mail já está em uso." : error.message);
+      }
+    }
+  }
+
   const fields: Record<string, unknown> = {};
   if (patch.full_name !== undefined) fields.full_name = patch.full_name.trim();
   if (patch.level !== undefined) fields.level = patch.level;
@@ -133,12 +156,62 @@ export async function deleteDepartment(id: string): Promise<ActionResult> {
   return done();
 }
 
+/** Lost phone: removes the person's authenticator so the next login asks to set up a new one. */
+export async function resetMfa(memberId: string): Promise<ActionResult> {
+  const { me, supabase } = await adminSession();
+  if (LEVEL_RANK[me.level] < LEVEL_RANK.admin) return { ok: false, error: "Só Admin ou Master pode redefinir a verificação." };
+  if (memberId === me.id) return { ok: false, error: "Peça a outro Admin ou Master para redefinir a sua." };
+  const { data: target } = await supabase.from("members").select("auth_user_id, email, level").eq("id", memberId).single();
+  if (!target) return { ok: false, error: "Pessoa não encontrada." };
+  if (LEVEL_RANK[target.level as Level] >= LEVEL_RANK.admin && me.level !== "master") {
+    return { ok: false, error: "Só um Master redefine a verificação de Admins e Masters." };
+  }
+  if (!target.auth_user_id) return { ok: false, error: "Essa pessoa ainda não entrou no DEVDOC." };
+
+  const admin = createAdminClient();
+  const { data: factors, error } = await admin.auth.admin.mfa.listFactors({ userId: target.auth_user_id });
+  if (error) return fail(error.message);
+  for (const f of factors?.factors ?? []) {
+    const del = await admin.auth.admin.mfa.deleteFactor({ userId: target.auth_user_id, id: f.id });
+    if (del.error) return fail(del.error.message);
+  }
+  // Ends open sessions too, so a stolen phone stops working at the next token refresh.
+  const revoke = await admin.rpc("revoke_sessions", { p_user: target.auth_user_id });
+  if (revoke.error) return fail(revoke.error.message);
+  await admin.from("audit_log").insert({
+    actor_id: me.id,
+    action: "verificação em duas etapas redefinida",
+    entity: "pessoa",
+    entity_id: memberId,
+    detail: { email: target.email },
+  });
+  return done();
+}
+
 export async function transferDocuments(from: string, to: string): Promise<ActionResult<{ moved: number }>> {
   const { supabase } = await adminSession();
   const { data, error } = await supabase.rpc("transfer_documents", { from_member: from, to_member: to });
   if (error) return fail(error.message);
   revalidatePath("/", "layout");
   return { ok: true, data: { moved: Number(data) } };
+}
+
+export async function deleteMember(id: string): Promise<ActionResult> {
+  const { me, supabase } = await adminSession();
+  if (me.level !== "master") return { ok: false, error: "Só um Master pode excluir pessoas." };
+  if (id === me.id) return { ok: false, error: "Você não pode excluir sua própria conta." };
+
+  const { error } = await supabase.rpc("delete_member", { p_member: id });
+  if (error) return fail(error.message);
+  // The profile photo goes too (LGPD: nothing of the person stays behind).
+  try {
+    const admin = createAdminClient();
+    const { data: files } = await admin.storage.from("avatars").list(id);
+    if (files?.length) await admin.storage.from("avatars").remove(files.map((f) => `${id}/${f.name}`));
+  } catch {
+    // The record is already gone; a leftover photo is unreachable because the route needs a member.
+  }
+  return done();
 }
 
 /* Operation membership (Gestor of the operation or Admin) ------------------------------- */

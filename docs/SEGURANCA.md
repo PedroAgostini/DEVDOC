@@ -20,12 +20,15 @@ Este documento descreve como o DEVDOC protege as informações, o que precisa es
 - **Permissões no banco (RLS).** Todas as tabelas públicas têm Row Level Security. Quem pode ler ou editar é decidido no Postgres a cada consulta, não na interface. Verificação: nenhuma tabela pública sem RLS.
 - **Privado é privado.** Documentos "Só eu" não são lidos nem por Admin nem por Master. A transferência de posse feita pelo Master não abre o conteúdo.
 - **Menor privilégio no compartilhamento.** Só o autor (ou um Admin, nunca em documento privado) muda grupos, pessoas e coeditores de um documento. Coeditores editam o texto, mas não ampliam o acesso.
+- **Cadastro protegido.** Cada pessoa troca só a própria foto e a senha. Nome, nível e grupos ficam com Admin e Master; o e-mail, só com Master, e a troca é registrada na auditoria.
 - **Senhas fortes.** Mínimo de 10 caracteres, com minúsculas, maiúsculas e números (na tela e no serviço de login).
+- **Verificação em duas etapas para todos.** Depois da senha ou do Google, todo acesso pede o código de um app autenticador (TOTP). A regra vale no banco: até a sessão chegar ao nível `aal2`, as funções de permissão tratam a pessoa como desconhecida, então uma senha roubada não lê nada, nem pela API. Quem perde o celular pede a um Admin (ou a um Master, se for Admin ou Master) para redefinir; a redefinição encerra as sessões abertas e fica na auditoria.
 
 ### Dados
 - **Pseudonimização com hash.** Visitas, cópias e buscas sem resultado não guardam quem foi. Guardam um SHA-256 do identificador da pessoa somado a um segredo aleatório de 256 bits, que fica no schema `private` e não é acessível pela API. Sem o segredo, o hash não pode ser revertido nem ligado à pessoa.
 - **Senhas** nunca passam pelo código do DEVDOC em texto guardado: o Supabase Auth armazena só o hash bcrypt.
 - **Retenção mínima** (limpeza diária automática): buscas sem resultado em 90 dias; visitas e cópias em 12 meses; histórico de "continue de onde parou" em 12 meses; auditoria em 5 anos; lixeira em 30 dias.
+- **Fotos de perfil** ficam no bucket privado `avatars`: só membros veem, e cada pessoa só envia ou apaga a própria. O banco recusa como foto qualquer link externo, o que impede imagens de rastreamento.
 - **Imagens protegidas.** O bucket é privado; cada imagem só é entregue a quem pode ler o documento dela. Apenas PNG, JPG, WEBP e GIF, até 10 MB. SVG é recusado, porque pode carregar script.
 
 ### Aplicação
@@ -54,7 +57,7 @@ Itens que dependem dos painéis e não ficam no código. Conferir antes de liber
 - [ ] Região do projeto em São Paulo (`sa-east-1`). Se não estiver, avaliar migração ou registrar a transferência internacional no [LGPD.md](LGPD.md).
 - [ ] Authentication > Sign In / Providers > E-mail: senha mínima de 10 caracteres, com minúsculas, maiúsculas e números.
 - [ ] Ativar a proteção contra senhas vazadas (Leaked Password Protection), disponível no plano Pro.
-- [ ] Ativar e exigir MFA (app autenticador) para Admins e Masters.
+- [ ] Authentication > Multi-Factor: app autenticador (TOTP) ativado para cadastro e verificação. O DEVDOC exige o segundo fator de todos; sem isso ativo, ninguém consegue entrar.
 - [ ] URL Configuration: Site URL e Redirect URLs apenas com o domínio oficial.
 - [ ] SMTP próprio da empresa para os e-mails de convite e acesso.
 - [ ] Database > Extensions: `pg_cron` ativo (limpeza da lixeira e retenção).
@@ -88,7 +91,7 @@ Considere incidente qualquer suspeita de acesso indevido, perda ou exposição d
 | Fase | O que fazer | Responsável |
 | --- | --- | --- |
 | 1. Detectar e registrar | Anotar o que foi visto, quando e por quem. Não apagar evidências. | Quem percebeu |
-| 2. Conter (primeiras horas) | Desativar as contas envolvidas no DEVDOC. Encerrar sessões (Supabase > Authentication > Users > Sign out, ou excluir as linhas do usuário em `auth.sessions`). Se uma chave vazou, girar as chaves de API do Supabase e atualizar a Vercel. Mudar a visibilidade de documentos expostos. | Master + TI |
+| 2. Conter (primeiras horas) | Desativar as contas envolvidas no DEVDOC. Se um celular com o app autenticador foi perdido ou roubado, usar "Redefinir verificação em duas etapas" em Administração > Pessoas. Encerrar sessões (Supabase > Authentication > Users > Sign out, ou excluir as linhas do usuário em `auth.sessions`). Se uma chave vazou, girar as chaves de API do Supabase e atualizar a Vercel. Mudar a visibilidade de documentos expostos. | Master + TI |
 | 3. Avaliar | Usar a aba Auditoria e os logs do Supabase (Logs > Auth, API, Postgres) para saber o que foi acessado, por quem e desde quando. Classificar os dados afetados e o risco aos titulares. | TI + DPO |
 | 4. Comunicar | Se houver risco ou dano relevante aos titulares, comunicar a ANPD e os titulares afetados (LGPD art. 48). O Regulamento de Comunicação de Incidente (Resolução CD/ANPD nº 15/2024) prevê prazo de 3 dias úteis a partir do conhecimento do incidente. Confirmar prazos e conteúdo com o jurídico. | DPO + jurídico |
 | 5. Corrigir | Remover a causa: corrigir permissão, código ou configuração. Restaurar dados de backup se preciso. | TI |

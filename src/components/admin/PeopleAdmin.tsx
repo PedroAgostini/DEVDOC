@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { ArrowRightLeft, Check, MailCheck, Pencil, UserPlus, X } from "lucide-react";
-import { inviteMember, transferDocuments, updateMember } from "@/app/actions/admin";
+import { ArrowRightLeft, Check, MailCheck, Pencil, ShieldOff, Trash2, UserPlus, X } from "lucide-react";
+import { deleteMember, inviteMember, resetMfa, transferDocuments, updateMember } from "@/app/actions/admin";
 import { MultiPicker } from "@/components/ui/MultiPicker";
 import { initials } from "@/lib/format";
 import { LEVEL_LABEL, LEVELS, type Department, type Level, type Member, type Operation } from "@/lib/types";
@@ -31,8 +31,10 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
   const [invite, setInvite] = useState(EMPTY_INVITE);
   const [depFilter, setDepFilter] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
   const [draft, setDraft] = useState({
     full_name: "",
+    email: "",
     level: "operacao" as Level,
     operations: [] as string[],
     departments: [] as string[],
@@ -42,6 +44,7 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
     ? members.filter((m) => (depFilter === "none" ? depsOf(m.id).length === 0 : depsOf(m.id).includes(depFilter)))
     : members;
   const [transferTo, setTransferTo] = useState("");
+  const [resetArmed, setResetArmed] = useState<string | null>(null);
   const [message, setMessage] = useState<{ text: string; error?: boolean } | null>(null);
   const [pending, start] = useTransition();
 
@@ -55,8 +58,9 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
   }
 
   function edit(m: Member) {
+    setDeleting(null);
     setEditing(m.id);
-    setDraft({ full_name: m.full_name, level: m.level, operations: opsOf(m.id), departments: depsOf(m.id), active: m.active });
+    setDraft({ full_name: m.full_name, email: m.email, level: m.level, operations: opsOf(m.id), departments: depsOf(m.id), active: m.active });
     setTransferTo("");
     setMessage(null);
   }
@@ -151,7 +155,36 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
           </thead>
           <tbody>
             {shown.map((m) =>
-              editing === m.id ? (
+              deleting === m.id ? (
+                <tr key={m.id}>
+                  <td colSpan={6}>
+                    <div role="group" aria-labelledby={`delete-title-${m.id}`} style={{ padding: 16, borderRadius: 16, background: "var(--danger-soft)" }}>
+                      <p id={`delete-title-${m.id}`} style={{ fontWeight: 600 }}>Excluir {m.full_name || m.email}?</p>
+                      <p className="small muted" style={{ marginTop: 4, overflowWrap: "anywhere" }}>
+                        O cadastro de {m.email} e a conta de login serão excluídos permanentemente. As sessões serão encerradas.
+                      </p>
+                      <p className="small muted" style={{ marginTop: 6 }}>
+                        Se houver documentos vinculados, desative o acesso e transfira os documentos em Editar antes de excluir.
+                      </p>
+                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 14 }}>
+                        <button type="button" className="btn btn-quiet btn-sm" autoFocus disabled={pending} onClick={() => setDeleting(null)}>Cancelar</button>
+                        <button
+                          type="button"
+                          className="btn btn-danger btn-sm"
+                          disabled={pending}
+                          onClick={() => run(() => deleteMember(m.id), () => {
+                            setDeleting(null);
+                            setMessage({ text: `${m.full_name || m.email} foi excluído. O acesso foi encerrado.` });
+                          })}
+                        >
+                          <Trash2 size={16} aria-hidden="true" /> {pending ? "Excluindo…" : "Excluir usuário"}
+                        </button>
+                        <button type="button" className="btn btn-quiet btn-sm" disabled={pending} onClick={() => edit(m)}>Editar pessoa</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ) : editing === m.id ? (
                 <tr key={m.id}>
                   <td colSpan={6}>
                     <form
@@ -164,6 +197,20 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
                       <div>
                         <label className="label" htmlFor={`n-${m.id}`}>Nome</label>
                         <input id={`n-${m.id}`} className="field" value={draft.full_name} onChange={(e) => setDraft({ ...draft, full_name: e.target.value })} />
+                      </div>
+                      <div>
+                        <label className="label" htmlFor={`e-${m.id}`}>E-mail</label>
+                        <input
+                          id={`e-${m.id}`}
+                          className="field"
+                          type="email"
+                          value={draft.email}
+                          readOnly={!isMaster}
+                          aria-describedby={isMaster ? undefined : `e-${m.id}-hint`}
+                          onChange={(e) => setDraft({ ...draft, email: e.target.value })}
+                          style={isMaster ? undefined : { opacity: 0.7, cursor: "not-allowed" }}
+                        />
+                        {!isMaster && <span id={`e-${m.id}-hint`} className="muted small">Só um Master altera o e-mail.</span>}
                       </div>
                       <div>
                         <label className="label" htmlFor={`l-${m.id}`}>Nível</label>
@@ -183,6 +230,21 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
                       <div style={{ display: "flex", gap: 8, alignItems: "flex-end", gridColumn: "1 / -1" }}>
                         <button type="submit" className="btn btn-primary btn-sm" disabled={pending}><Check size={16} /> Salvar</button>
                         <button type="button" className="btn btn-quiet btn-sm" onClick={() => setEditing(null)}>Cancelar</button>
+                        {m.id !== myId && (isMaster || (myLevel === "admin" && (m.level === "operacao" || m.level === "gestor"))) && (
+                          <button
+                            type="button"
+                            className="btn btn-quiet btn-sm"
+                            style={{ marginLeft: "auto" }}
+                            disabled={pending}
+                            onClick={() => {
+                              if (resetArmed !== m.id) return setResetArmed(m.id);
+                              setResetArmed(null);
+                              run(() => resetMfa(m.id), () => setMessage({ text: `Verificação em duas etapas de ${m.full_name || m.email} redefinida. No próximo acesso a pessoa configura de novo.` }));
+                            }}
+                          >
+                            <ShieldOff size={16} /> {resetArmed === m.id ? "Confirmar redefinição" : "Redefinir verificação em duas etapas"}
+                          </button>
+                        )}
                       </div>
                       {isMaster && !m.active && (
                         <div style={{ gridColumn: "1 / -1", display: "flex", gap: 8, alignItems: "flex-end", flexWrap: "wrap", borderTop: "1px solid var(--line)", paddingTop: 14 }}>
@@ -240,11 +302,30 @@ export function PeopleAdmin({ members, memberOps, memberDeps, operations, depart
                     {!m.active ? "Desativado" : m.auth_user_id ? "Ativo" : "Aguardando primeiro acesso"}
                   </td>
                   <td style={{ textAlign: "right" }}>
-                    {canTouch(m) && (
-                      <button type="button" className="icon-btn" aria-label={`Editar ${m.full_name || m.email}`} onClick={() => edit(m)}>
-                        <Pencil size={16} />
-                      </button>
-                    )}
+                    <div style={{ display: "inline-flex", gap: 4 }}>
+                      {canTouch(m) && (
+                        <button type="button" className="icon-btn" aria-label={`Editar ${m.full_name || m.email}`} title="Editar" disabled={pending} onClick={() => edit(m)}>
+                          <Pencil size={16} />
+                        </button>
+                      )}
+                      {isMaster && m.id !== myId && (
+                        <button
+                          type="button"
+                          className="icon-btn"
+                          style={{ color: "var(--danger)" }}
+                          aria-label={`Excluir ${m.full_name || m.email}`}
+                          title="Excluir usuário"
+                          disabled={pending}
+                          onClick={() => {
+                            setEditing(null);
+                            setMessage(null);
+                            setDeleting(m.id);
+                          }}
+                        >
+                          <Trash2 size={16} aria-hidden="true" />
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ),

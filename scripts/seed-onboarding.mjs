@@ -121,6 +121,7 @@ docs.push({
 ## Seus primeiros 15 minutos
 
 - [ ] Entrar com Google ou com o link de acesso que chegou por e-mail
+- [ ] Ativar a verificação em duas etapas com um app autenticador
 - [ ] Escolher o tema claro ou escuro no rodapé da barra lateral
 - [ ] Abrir o painel da sua operação na barra lateral
 - [ ] Buscar algo com Ctrl K
@@ -131,6 +132,8 @@ docs.push({
 
 - **Com Google:** use a conta da empresa.
 - **Primeiro acesso por e-mail:** na tela de login, clique em "Primeiro acesso ou esqueceu a senha?", receba o link e crie sua senha.
+- **Verificação em duas etapas:** no primeiro acesso, o DEVDOC mostra um QR code. Leia com um app autenticador (Google Authenticator, Microsoft Authenticator ou 1Password) e digite o código de 6 dígitos. Nos próximos acessos, ele pede só o código do app.
+- **Perdeu ou trocou de celular?** Peça a um Admin para redefinir sua verificação; no acesso seguinte você configura de novo.
 - Só entra quem foi liberado por um Admin ou Master. Se aparecer "sem acesso", fale com eles.
 
 ## 2. Achar
@@ -276,6 +279,9 @@ Fica no ícone de ajustes, no rodapé da barra lateral.
 1. Em Pessoas, clique em **Liberar acesso**.
 2. Preencha e-mail, nome, nível, operações e departamentos.
 3. A pessoa recebe um convite por e-mail, ou entra com Google, ou usa "Primeiro acesso" na tela de login.
+4. No primeiro acesso, ela configura a verificação em duas etapas com um app autenticador.
+
+**Redefinir a verificação em duas etapas:** se alguém perdeu o celular, abra a pessoa em Pessoas e use **Redefinir verificação em duas etapas**. As sessões abertas dela são encerradas, e no próximo acesso ela configura de novo. Admins redefinem Operação e Gestor; a de Admins e Masters, só um Master redefine. Fica registrado na auditoria.
 
 Admins liberam os níveis **Operação** e **Gestor**. Para criar outro Admin ou Master, peça a um Master.
 

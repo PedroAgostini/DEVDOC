@@ -37,6 +37,21 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // Everyone uses two-step verification. Until the session reaches aal2 the database
+  // treats the person as a stranger anyway; this sends them to the screen that fixes it.
+  const MFA_FREE = ["/auth/mfa", "/auth/callback", "/login", "/privacidade"];
+  if (user && !MFA_FREE.some((p) => path === p || path.startsWith(`${p}/`))) {
+    const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+    if (aal?.currentLevel !== "aal2") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/auth/mfa";
+      url.search = path === "/" ? "" : `?voltar=${encodeURIComponent(path + request.nextUrl.search)}`;
+      const redirect = NextResponse.redirect(url);
+      response.cookies.getAll().forEach((c) => redirect.cookies.set(c));
+      return redirect;
+    }
+  }
+
   return response;
 }
 
